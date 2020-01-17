@@ -15,9 +15,14 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <style>
+    .custom-box .on { font-weight: bold; color: #3490dc; }
+    .custom-box .off { font-weight: normal; color: #aaa; }
+    </style>
 </head>
 <body>
     <div id="app">
@@ -33,7 +38,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        <li><a href="{{ route('boards.index') }}">boards</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

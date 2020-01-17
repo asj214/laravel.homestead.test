@@ -12,10 +12,14 @@ class Board extends Model {
     protected $table = "boards";
     protected $dates = ['deleted_at'];
 
-    protected $with = ['user'];
+    protected $with = ['user', 'thumbnail'];
 
     public function user(){
         return $this->belongsTo(User::class);
+    }
+
+    public function thumbnail(){
+        return $this->hasOne(Attachment::class, 'attachment_id')->where('attachment_type', 'boards')->orderBy('id', 'desc');
     }
 
 }

@@ -2,42 +2,74 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Http\Request;
+
 use App\Board;
+use App\Attachment;
 
 class BoardController extends Controller {
 
+    public function __construct(){
+        // 사용자 권한
+        $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
+
     public function index(Request $request){
 
-        $board = Board::orderBy('id', 'desc');
-        $board = $board->paginate(15);
+        $boards = Board::orderBy('id', 'desc');
+        $boards = $boards->paginate(15);
 
-        return response()->json($board);
+        return view('board.lists', compact('boards'));
 
     }
 
-    public function show(Request $request, $id){
-        $board = Board::find($id);
-        return response()->json($board);
+    public function create(){
+        return view('board.form');
     }
 
     public function store(Request $request){
 
         $validatedData = $request->validate([
-            'user_id' => 'required',
             'title' => 'required|max:255',
-            'body' => 'required'
+            'body' => 'required',
+            'thumbnail' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
-        $board = new Board;
-        $board->user_id = $request->user_id;
+        $board = new Board();
         $board->title = $request->title;
         $board->body = $request->body;
+        $board->user_id = Auth::id();
         $board->save();
 
-        $board = Board::find($board->id);
+        if($request->hasFile('thumbnail')){
 
-        return response()->json($board);
+            $path = $request->file('thumbnail')->store('public/upfiles/board');
+
+            $attachment = new Attachment();
+            $attachment->attachment_id = $board->id;
+            $attachment->attachment_type = 'boards';
+            $attachment->path = str_replace("public", "storage", $path);
+            $attachment->save();
+
+        }
+
+        return redirect()->route('boards.show', ['id' => $board->id]);
+
+    }
+
+    public function show(Request $request, $id){
+
+        $board = Board::find($id);
+        return view('board.show', compact('board'));
+
+    }
+
+    public function edit(Request $request, $id){
+
+        $board = Board::find($id);
+        return view('board.edit', compact('board'));
 
     }
 
@@ -45,7 +77,8 @@ class BoardController extends Controller {
 
         $validatedData = $request->validate([
             'title' => 'required|max:255',
-            'body' => 'required'
+            'body' => 'required',
+            'thumbnail' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
         $board = Board::find($id);
@@ -53,20 +86,19 @@ class BoardController extends Controller {
         $board->body = $request->body;
         $board->save();
 
-        $board = Board::find($id);
-        return response()->json($board);
+        if($request->hasFile('thumbnail')){
 
-    }
+            $path = $request->file('thumbnail')->store('public/upfiles/board');
 
-    public function destroy($id){
+            $attachment = new Attachment();
+            $attachment->attachment_id = $board->id;
+            $attachment->attachment_type = 'boards';
+            $attachment->path = str_replace("public", "storage", $path);
+            $attachment->save();
 
-        $status = Board::destroy($id);
+        }
 
-        $response = array(
-            "status" => $status
-        );
-
-        return response()->json($response);
+        return redirect()->route('boards.show', ['id' => $board->id]);
 
     }
 
