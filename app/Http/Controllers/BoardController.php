@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Board;
 use App\Attachment;
+use App\Like;
 
 class BoardController extends Controller {
 
@@ -18,8 +19,25 @@ class BoardController extends Controller {
 
     public function index(Request $request){
 
+        $per_page = 15;
+
+
+        // $boards = Board::all();
         $boards = Board::orderBy('id', 'desc');
-        $boards = $boards->paginate(15);
+        $boards = $boards->paginate($per_page);
+
+        if(Auth::check()){
+
+            $boards = $boards->load(['likes']);
+        }
+
+        // $boards = $boards->get();
+        // $boards = $boards->paginate($per_page);
+
+        echo "<pre>";
+        print_r($boards->toArray());
+        echo "</pre>";
+        exit;
 
         return view('board.lists', compact('boards'));
 
@@ -99,6 +117,33 @@ class BoardController extends Controller {
         }
 
         return redirect()->route('boards.show', ['id' => $board->id]);
+
+    }
+
+    public function destroy(Request $request, $id){
+        Board::destroy($id);
+        return redirect()->route('boards.index');
+    }
+
+    public function like(Request $request, $id){
+
+        $like = new Like();
+        $like->like_id = $id;
+        $like->like_type = 'boards';
+        $like->user_id = Auth::id();
+        $like->save();
+
+        $board = Board::find($id);
+        $board->increment('like_cnt');
+
+    }
+
+    public function unlike(Request $request, $id){
+
+        Like::where('like_type', 'boards')->where('like_id', $id)->where('user_id', Auth::id())->delete();
+
+        $board = Board::find($id);
+        $board->decrement('like_cnt');
 
     }
 

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -20,6 +21,12 @@ class Board extends Model {
 
     public function thumbnail(){
         return $this->hasOne(Attachment::class, 'attachment_id')->where('attachment_type', 'boards')->orderBy('id', 'desc');
+    }
+
+    public function likes(){
+
+        return $this->hasMany(Like::class, 'like_id')->where('like_type', 'boards')->where("user_id", Auth::user()->id);
+
     }
 
 }
