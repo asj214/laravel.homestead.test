@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Board;
 use App\Attachment;
 use App\Like;
+use App\Comment;
 
 class BoardController extends Controller {
 
@@ -21,23 +22,13 @@ class BoardController extends Controller {
 
         $per_page = 15;
 
-
-        // $boards = Board::all();
         $boards = Board::orderBy('id', 'desc');
         $boards = $boards->paginate($per_page);
 
-        if(Auth::check()){
-
-            $boards = $boards->load(['likes']);
-        }
-
-        // $boards = $boards->get();
-        // $boards = $boards->paginate($per_page);
-
-        echo "<pre>";
-        print_r($boards->toArray());
-        echo "</pre>";
-        exit;
+        // echo "<pre>";
+        // print_r($boards->toArray());
+        // echo "</pre>";
+        // exit;
 
         return view('board.lists', compact('boards'));
 
@@ -144,6 +135,37 @@ class BoardController extends Controller {
 
         $board = Board::find($id);
         $board->decrement('like_cnt');
+
+    }
+
+    public function comments(Request $request, $id){
+
+        $validatedData = $request->validate([
+            'body' => 'required'
+        ]);
+
+        $comment = new Comment();
+        $comment->user_id = Auth::id();
+        $comment->body = $request->body;
+        $comment->commentable_id = $id;
+        $comment->commentable_type = 'boards';
+        $comment->save();
+
+        $board = Board::find($id);
+        $board->increment('comment_cnt');
+
+        return redirect()->route('boards.show', ['id' => $id]);
+
+    }
+
+    public function remove_comments(Request $request, $id){
+
+        Comment::where('commentable_type', 'boards')->where('commentable_id', $id)->delete();
+
+        $board = Board::find($id);
+        $board->decrement('comment_cnt');
+
+        return redirect()->route('boards.show', ['id' => $id]);
 
     }
 

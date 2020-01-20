@@ -13,7 +13,6 @@
                     <h5 class="card-title">{{ $board->title }}</h5>
                     <p class="card-text">{!! nl2br($board->body) !!}</p>
                 </div>
-
                 <div class="card-body custom-box">
                     <div class="float-left">
                         <a href="{{ route('boards.index') }}" class="card-link">List</a>
@@ -26,6 +25,24 @@
                         </form>
                         @endif
                     </div>
+                </div>
+                <div class="card-body custom-box">
+                    <form method="post" action="{{ route('boards.comments', ['id' => $board->id]) }}">
+                        @csrf
+                        <div class="input-group">
+                            <textarea name="body" class="form-control" aria-label="With textarea"></textarea>
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary">작성</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-body custom-box">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Cras justo odio</li>
+                        <li class="list-group-item">Dapibus ac facilisis in</li>
+                        <li class="list-group-item">Vestibulum at eros</li>
+                    </ul>
                 </div>
 
             </div>

@@ -12,13 +12,15 @@
             <div class="card mb-4">
                 <img src="{{ asset($board->thumbnail->path) }}" class="card-img-top" />
                 <div class="card-body">
-                    <h5 class="card-title">{{ $board->title }}</h5>
+                    <h5 class="card-title">
+                        <a href="{{ route('boards.show', ['id' => $board->id]) }}">{{ $board->title }}</a>
+                    </h5>
                     <p class="card-text">{!! nl2br($board->body) !!}</p>
                 </div>
                 <div class="card-body custom-box">
-                    <a href="javascript:void(0);" class="btn-like" data-board_id="{{ $board->id }}">
+                    <!-- <a href="javascript:void(0);" class="btn-like" data-board_id="{{ $board->id }}">
                         <i class="far fa-heart"></i>&nbsp;{!! number_format($board->like_cnt) !!}
-                    </a>
+                    </a> -->
                 </div>
             </div>
             @endif

@@ -13,7 +13,7 @@ class Board extends Model {
     protected $table = "boards";
     protected $dates = ['deleted_at'];
 
-    protected $with = ['user', 'thumbnail'];
+    protected $with = ['user', 'thumbnail', 'comments'];
 
     public function user(){
         return $this->belongsTo(User::class);
@@ -23,10 +23,12 @@ class Board extends Model {
         return $this->hasOne(Attachment::class, 'attachment_id')->where('attachment_type', 'boards')->orderBy('id', 'desc');
     }
 
+    public function comments(){
+        return $this->hasMany(Comment::class, 'commentable_id')->where('commentable_type', 'boards')->orderBy('id', 'desc');
+    }
+
     public function likes(){
-
         return $this->hasMany(Like::class, 'like_id')->where('like_type', 'boards')->where("user_id", Auth::user()->id);
-
     }
 
 }
