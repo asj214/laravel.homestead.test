@@ -70,7 +70,13 @@ class BoardController extends Controller {
 
     public function show(Request $request, $id){
 
-        $board = Board::find($id);
+        $board = Board::with('comments')->find($id);
+
+        // echo "<pre>";
+        // print_r($board->toArray());
+        // echo "</pre>";
+        // exit;
+
         return view('board.show', compact('board'));
 
     }

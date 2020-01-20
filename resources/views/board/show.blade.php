@@ -32,18 +32,20 @@
                         <div class="input-group">
                             <textarea name="body" class="form-control" aria-label="With textarea"></textarea>
                             <div class="input-group-append">
-                                <button type="button" class="btn btn-outline-secondary">작성</button>
+                                <input type="submit" class="btn btn-outline-secondary" value="작성" />
                             </div>
                         </div>
                     </form>
                 </div>
+                @if(count($board->comments) > 0)
                 <div class="card-body custom-box">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Cras justo odio</li>
-                        <li class="list-group-item">Dapibus ac facilisis in</li>
-                        <li class="list-group-item">Vestibulum at eros</li>
+                        @foreach($board->comments as $comment)
+                        <li class="list-group-item">{!! nl2br($comment->body) !!}</li>
+                        @endforeach
                     </ul>
                 </div>
+                @endif
 
             </div>
 

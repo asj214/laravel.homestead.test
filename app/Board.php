@@ -13,7 +13,7 @@ class Board extends Model {
     protected $table = "boards";
     protected $dates = ['deleted_at'];
 
-    protected $with = ['user', 'thumbnail', 'comments'];
+    protected $with = ['user', 'thumbnail'];
 
     public function user(){
         return $this->belongsTo(User::class);
