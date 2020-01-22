@@ -17,3 +17,6 @@ Route::delete('boards/{id}/comments', 'BoardController@remove_comments')->name('
 Route::resources([
     'boards' => 'BoardController'
 ]);
+
+
+Route::get('users/{id}', 'UserController@show')->name('users.show');

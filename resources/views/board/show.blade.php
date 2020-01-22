@@ -42,11 +42,11 @@
                     <ul class="list-unstyled">
                         @foreach($board->comments as $comment)
                         <li class="media my-4">
-                            <a href="#"><img src="https://via.placeholder.com/64" class="mr-3" /></a>
+                            <a href="{{ route('users.show', ['id' => $comment->user_id]) }}"><img src="https://via.placeholder.com/64" class="mr-3" /></a>
                             <div class="media-body">
                                 <div>
                                     <div class="float-left">
-                                        <a href="#"><b>{{ $comment->user->name }}</b></a>
+                                        <a href="{{ route('users.show', ['id' => $comment->user_id]) }}"><b>{{ $comment->user->name }}</b></a>
                                     </div>
                                     <div class="float-right">
                                         <span class="text-monospace">{{ $comment->created_at->format('Y.m.d') }}</span>
