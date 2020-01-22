@@ -36,4 +36,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected $with = ['thumbnail'];
+
+    public function thumbnail(){
+        return $this->hasOne(Attachment::class, 'attachment_id')->where('attachment_type', 'users')->orderBy('id', 'desc');
+    }
+
 }
