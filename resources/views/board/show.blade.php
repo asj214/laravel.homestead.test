@@ -13,7 +13,7 @@
                     <h5 class="card-title">{{ $board->title }}</h5>
                     <p class="card-text">{!! nl2br($board->body) !!}</p>
                 </div>
-                <div class="card-body custom-box">
+                <div class="card-body">
                     <div class="float-left">
                         <a href="{{ route('boards.index') }}" class="card-link">List</a>
                         @if(Auth::id() == $board->user_id)
@@ -26,29 +26,41 @@
                         @endif
                     </div>
                 </div>
-                <div class="card-body custom-box">
+                <hr />
+                <div class="card-body">
                     <form method="post" action="{{ route('boards.comments', ['id' => $board->id]) }}">
                         @csrf
-                        <div class="input-group">
-                            <textarea name="body" class="form-control" aria-label="With textarea"></textarea>
-                            <div class="input-group-append">
-                                <input type="submit" class="btn btn-outline-secondary" value="작성" />
-                            </div>
+                        <div class="form-group">
+                            <label for="body">댓글</label>
+                            <textarea name="body" id="body" class="form-control" aria-label="With textarea" required></textarea>
                         </div>
+                        <input type="submit" class="btn btn-block btn-light btn-outline-secondary" value="작성" />
                     </form>
                 </div>
                 @if(count($board->comments) > 0)
-                <div class="card-body custom-box">
-                    <ul class="list-group list-group-flush">
+                <div class="card-body">
+                    <ul class="list-unstyled">
                         @foreach($board->comments as $comment)
-                        <li class="list-group-item">{!! nl2br($comment->body) !!}</li>
+                        <li class="media my-4">
+                            <a href="#"><img src="https://via.placeholder.com/64" class="mr-3" /></a>
+                            <div class="media-body">
+                                <div>
+                                    <div class="float-left">
+                                        <a href="#"><b>{{ $comment->user->name }}</b></a>
+                                    </div>
+                                    <div class="float-right">
+                                        <span class="text-monospace">{{ $comment->created_at->format('Y.m.d') }}</span>
+                                    </div>
+                                </div>
+                                <br />
+                                <p>{!! nl2br($comment->body) !!}</p>
+                            </div>
+                        </li>
                         @endforeach
                     </ul>
                 </div>
                 @endif
-
             </div>
-
         </div>
     </div>
 </div>

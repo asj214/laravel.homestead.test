@@ -18,9 +18,7 @@
                     <p class="card-text">{!! nl2br($board->body) !!}</p>
                 </div>
                 <div class="card-body custom-box">
-                    <!-- <a href="javascript:void(0);" class="btn-like" data-board_id="{{ $board->id }}">
-                        <i class="far fa-heart"></i>&nbsp;{!! number_format($board->like_cnt) !!}
-                    </a> -->
+                    <i class="far fa-comment-dots"></i>&nbsp;{{ $board->comment_cnt }}
                 </div>
             </div>
             @endif
