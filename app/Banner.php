@@ -12,4 +12,8 @@ class Banner extends Model {
     protected $table = "banners";
     protected $dates = ['deleted_at'];
 
+    public function attachment(){
+        return $this->hasOne(Attachment::class, 'attachment_id')->where('attachment_type', 'banners')->orderBy('id', 'desc');
+    }
+
 }
