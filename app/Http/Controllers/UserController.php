@@ -69,4 +69,12 @@ class UserController extends Controller {
 
     }
 
+    public function edit(Request $request, $id){
+
+        $user = User::find($id);
+
+        return view('user.edit', compact('user'));
+
+    }
+
 }

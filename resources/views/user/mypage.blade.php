@@ -32,7 +32,7 @@
                 </div>
                 @if(Auth::id() == $user->id)
                 <div class="card-body">
-                    <a href="{{ route('user.edit', ['id' => $user->id])}}" class="card-link">내 정보 수정</a>
+                    <a href="{{ route('users.edit', ['id' => $user->id])}}" class="card-link">정보 수정</a>
                 </div>
                 @endif
             </div>
