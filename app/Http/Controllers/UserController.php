@@ -15,11 +15,6 @@ class UserController extends Controller {
 
         $user = User::with(['avatar'])->withCount(['boards', 'comments'])->find($id);
 
-        // echo "<pre>";
-        // print_r($user->toArray());
-        // echo "</pre>";
-        // exit;
-
         return view('user.mypage', compact('user'));
 
     }
@@ -33,11 +28,6 @@ class UserController extends Controller {
         $boards = Board::where('user_id', $id);
         $boards = $boards->orderBy('id', 'desc');
         $boards = $boards->paginate($per_page);
-
-        // echo "<pre>";
-        // print_r($boards->toArray());
-        // echo "</pre>";
-        // exit;
 
         return view('user.board', compact('user', 'boards'));
 
@@ -59,11 +49,6 @@ class UserController extends Controller {
         $comments = Comment::where('user_id', $id);
         $comments = $comments->orderBy('id', 'desc');
         $comments = $comments->paginate($per_page);
-
-        // echo "<pre>";
-        // print_r($comments->toArray());
-        // echo "</pre>";
-        // exit;
 
         return view('user.comment', compact('user', 'comment_type', 'comments'));
 

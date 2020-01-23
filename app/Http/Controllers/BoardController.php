@@ -72,11 +72,6 @@ class BoardController extends Controller {
 
         $board = Board::with('comments.user_avatar')->find($id);
 
-        // echo "<pre>";
-        // print_r($board->toArray());
-        // echo "</pre>";
-        // exit;
-
         return view('board.show', compact('board'));
 
     }
