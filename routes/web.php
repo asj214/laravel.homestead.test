@@ -18,5 +18,6 @@ Route::resources([
     'boards' => 'BoardController'
 ]);
 
-
 Route::get('users/{id}', 'UserController@show')->name('users.show');
+Route::get('users/{id}/boards', 'UserController@boards')->name('users.boards');
+Route::get('users/{id}/comments', 'UserController@comments')->name('users.comments');

@@ -70,7 +70,7 @@ class BoardController extends Controller {
 
     public function show(Request $request, $id){
 
-        $board = Board::with('comments')->find($id);
+        $board = Board::with('comments.user_avatar')->find($id);
 
         // echo "<pre>";
         // print_r($board->toArray());

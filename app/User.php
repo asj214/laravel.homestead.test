@@ -37,10 +37,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    protected $with = ['thumbnail'];
+    // protected $with = ['avatar'];
 
-    public function thumbnail(){
-        return $this->hasOne(Attachment::class, 'attachment_id')->where('attachment_type', 'users')->orderBy('id', 'desc');
+    public function avatar(){
+        return $this->hasOne(Attachment::class, 'attachment_id')->where('attachment_type', 'avatar')->orderBy('id', 'desc');
+    }
+
+    public function boards(){
+        return $this->hasMany(Board::class, 'user_id');
+    }
+
+    public function comments(){
+        return $this->hasMany(Comment::class, 'user_id');
     }
 
 }
