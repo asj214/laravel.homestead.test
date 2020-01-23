@@ -21,20 +21,20 @@
                 </div>
 
                 <div class="list-group list-group-flush">
-                    <a href="#" class="list-group-item d-flex justify-content-between align-items-center">
+                    <a href="{{ route('users.boards', ['id' => $user->id]) }}" class="list-group-item d-flex justify-content-between align-items-center">
                         작성한 게시글
                         <span class="badge badge-primary badge-pill">{{ $user->boards_count }}</span>
                     </a>
-                    <a href="#" class="list-group-item d-flex justify-content-between align-items-center">
+                    <a href="{{ route('users.comments', ['id' => $user->id]) }}" class="list-group-item d-flex justify-content-between align-items-center">
                         작성한 댓글
                         <span class="badge badge-primary badge-pill">{{ $user->comments_count }}</span>
                     </a>
                 </div>
-
-
+                @if(Auth::id() == $user->id)
                 <div class="card-body">
-                    asd
+                    <a href="{{ route('user.edit', ['id' => $user->id])}}" class="card-link">내 정보 수정</a>
                 </div>
+                @endif
             </div>
 
         </div>
