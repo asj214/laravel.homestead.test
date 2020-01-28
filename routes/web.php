@@ -23,6 +23,14 @@ Route::get('users/{id}/boards', 'UserController@boards')->name('users.boards');
 Route::get('users/{id}/comments', 'UserController@comments')->name('users.comments');
 Route::get('users/{id}/edit', 'UserController@edit')->name('users.edit');
 
-Route::group(['prefix' => 'adm', 'middleware' => 'auth'], function(){
-    Route::resource('banners', 'adm\\BannerController');
+Route::group(['prefix' => 'adm', 'name' => 'adm.', 'middleware' => 'auth'], function(){
+
+    // Route::resource('banners', 'adm\\BannerController', ['as' => 'adm']);
+    Route::get('banners', 'adm\\BannerController@index')->name('adm.banners.index');
+    Route::get('banners/create', 'adm\\BannerController@create')->name('adm.banners.create');
+    Route::post('banners/store', 'adm\\BannerController@store')->name('adm.banners.store');
+    Route::get('banners/{id}/edit', 'adm\\BannerController@edit')->name('adm.banners.edit');
+    Route::match(['put', 'patch'], 'adm\\BannerController@update')->name('adm.banners.update');
+    Route::delete('banners/{id}', 'adm\\BannerController@destroy')->name('adm.banners.destroy');
+
 });

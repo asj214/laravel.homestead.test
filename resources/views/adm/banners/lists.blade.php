@@ -6,53 +6,8 @@
         <div class="panel panel-default">
             <div class="panel-heading">Search</div>
             <div class="panel-body">
-                <div class="col-md-12">
-                    <form id="frm_sch_toilet" class="form-horizontal">
-                        <input type="hidden" name="page" value="1" />
-                        <div class="form-group form-group-sm">
-                            <div class="col-md-2">
-                                <select name="sch_type" class="form-control">
-                                    <option value="name" >이름</option>
-                                    <option value="addr" >주소</option>
-                                    <option value="nickname" >작성자</option>
-                                </select>
-                            </div>
-                            <div class="col-md-9">
-                                <input name="sch_text" type="text" class="form-control" value="" />
-                            </div>
-                            <div class="col-md-1">
-                                <button type="button" id="btn-sch" class="btn btn-default btn-sm">검색</button>
-                            </div>
-                        </div>
-                        <div class="form-group form-group-sm">
-                            <label class="col-md-2 control-label">장소 유형</label>
-                            <div class="col-md-9">
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" class="chkbox_place_type" value="all"> 전체
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" name="place_type[]" value="B"> 일반건물
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" name="place_type[]" value="P"> 공공기관
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" name="place_type[]" value="S"> 지하철
-                                </label>
-                            </div>
-                        </div>
-                        <div class="form-group form-group-sm">
-                            <label class="col-md-2 control-label">호선</label>
-                            <div class="col-md-9">
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" class="chkbox_line_number" value="all"> 전체
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" name="line_number[]" value="1" > 1호선
-                                </label>
-                            </div>
-                        </div>
-                    </form>
+                <div>
+                    <a href="{{ route('adm.banners.create') }}" class="btn btn-default">등록</a>
                 </div>
             </div>
         </div>
