@@ -56,14 +56,7 @@ class BannerController extends Controller {
 
     public function store(Request $request){
 
-        $validatedData = $request->validate([
-            'title' => 'required|max:255',
-            'category_id' => 'required',
-            'sub_category_id' => 'required',
-            'started_at' => 'required|date',
-            'finished_at' => 'required|date',
-            'display_yn' => 'required',
-        ]);
+        $validatedData = $request->validate($this->rules());
 
         $banner = new Banner();
         $banner->user_id = Auth::id();
