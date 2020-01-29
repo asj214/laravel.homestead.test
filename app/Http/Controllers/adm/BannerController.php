@@ -142,7 +142,8 @@ class BannerController extends Controller {
     }
 
     public function destroy(Request $request, $id){
-
+        Banner::destroy($id);
+        return redirect()->route('adm.banners.index');
     }
 
     public function categorys(Request $request){
