@@ -9,11 +9,13 @@
 	<link href="{{ asset('css/lumino/font-awesome.min.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/lumino/datepicker3.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/lumino/styles.css') }}" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{{ asset('js/datetimepicker/jquery.datetimepicker.min.css') }}" />
 	<!--Custom Font-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
     <script src="{{ asset('js/lumino/jquery-1.11.1.min.js') }}"></script>
 	<script src="{{ asset('js/lumino/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/lumino/bootstrap-datepicker.js') }}"></script>
+	<script src="{{ asset('js/datetimepicker/jquery.datetimepicker.full.min.js') }}"></script>
 </head>
 <body>
 
@@ -50,7 +52,7 @@
 			<a href="index.html"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a>
 		</li>
         <li {!! (Request::segment(2) == "banners" ? 'class="active"': '') !!}>
-			<a href="{{ url('admin/banners') }}"><em class="fa fa-calendar">&nbsp;</em> Banner</a>
+			<a href="{{ route('adm.banners.index') }}"><em class="fa fa-calendar">&nbsp;</em> Banner</a>
 		</li>
         <li>
 			<a href="javascript:void(0);" id="btn-logout"><em class="fa fa-power-off">&nbsp;</em> Logout</a>
@@ -76,9 +78,27 @@
 </form>
 <script type="text/javascript">
 $(document).ready(function(){
+
 	$('#btn-logout').click(function(){
 		$('#logout-form').submit();
 	});
+
+	$('.datepicker').datepicker({
+		format: 'yyyy-m-d'
+	});
+	/*
+	$('.datetimepicker').datetimepicker({
+		format: 'Y-m-d H:i',
+		onSelectDate: function(ct, $i){
+			console.log(ct);
+			console.log($i);
+		},
+		onSelectTime: function(ct, $i){
+			console.log(ct);
+			console.log($i);
+		}
+	});
+	*/
 });
 </script>
 </body>

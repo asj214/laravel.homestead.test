@@ -30,7 +30,10 @@ Route::group(['prefix' => 'adm', 'name' => 'adm.', 'middleware' => 'auth'], func
     Route::get('banners/create', 'adm\\BannerController@create')->name('adm.banners.create');
     Route::post('banners/store', 'adm\\BannerController@store')->name('adm.banners.store');
     Route::get('banners/{id}/edit', 'adm\\BannerController@edit')->name('adm.banners.edit');
-    Route::match(['put', 'patch'], 'adm\\BannerController@update')->name('adm.banners.update');
+    Route::match(['put', 'patch'], 'banners/{id}/update', 'adm\\BannerController@update')->name('adm.banners.update');
     Route::delete('banners/{id}', 'adm\\BannerController@destroy')->name('adm.banners.destroy');
+
+    Route::get('banners/categorys', 'adm\\BannerController@categorys')->name('adm.banners.categorys');
+
 
 });
