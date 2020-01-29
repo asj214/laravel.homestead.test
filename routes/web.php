@@ -25,6 +25,11 @@ Route::get('users/{id}/edit', 'UserController@edit')->name('users.edit');
 
 Route::group(['prefix' => 'adm', 'name' => 'adm.', 'middleware' => 'auth'], function(){
 
+    Route::get('users', 'adm\\UserController@index')->name('adm.users.index');
+    Route::get('users/{id}/edit', 'adm\\UserController@edit')->name('adm.users.edit');
+    Route::match(['put', 'patch'], 'users/{id}/update', 'adm\\UserController@update')->name('adm.users.update');
+    Route::delete('users/{id}', 'adm\\UserController@destroy')->name('adm.users.destroy');
+
     // Route::resource('banners', 'adm\\BannerController', ['as' => 'adm']);
     Route::get('banners', 'adm\\BannerController@index')->name('adm.banners.index');
     Route::get('banners/create', 'adm\\BannerController@create')->name('adm.banners.create');

@@ -51,8 +51,11 @@
         <li>
 			<a href="index.html"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a>
 		</li>
+		<li {!! (Request::segment(2) == "users" ? 'class="active"': '') !!}>
+			<a href="{{ route('adm.users.index') }}"><em class="fa fa-user">&nbsp;</em> User</a>
+		</li>
         <li {!! (Request::segment(2) == "banners" ? 'class="active"': '') !!}>
-			<a href="{{ route('adm.banners.index') }}"><em class="fa fa-calendar">&nbsp;</em> Banner</a>
+			<a href="{{ route('adm.banners.index') }}"><em class="fa fa-film">&nbsp;</em> Banner</a>
 		</li>
         <li>
 			<a href="javascript:void(0);" id="btn-logout"><em class="fa fa-power-off">&nbsp;</em> Logout</a>
