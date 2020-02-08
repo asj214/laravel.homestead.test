@@ -41,7 +41,7 @@ vagrant reload --provision
     ```
     host: 127.0.0.1
     port: 33060
-    database: homestead.laravel.test
+    database: laravel.homestead.test
     username: homestead
     password: secret
     ```
@@ -49,7 +49,7 @@ vagrant reload --provision
     ```
     host: 127.0.0.1
     port: 3306
-    database: homestead.laravel.test
+    database: laravel.homestead.test
     username: homestead
     password: secret
     ```

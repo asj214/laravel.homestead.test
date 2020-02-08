@@ -10,8 +10,8 @@ keys:
     - ~/.ssh/id_rsa
 
 folders:
-    - map: /Users/sjahn/workspace
-      to: /home/vagrant/Code
+    - map: /Users/sjahn/workspace/laravel.homestead.test
+      to: /home/vagrant/Code/laravel.homestead.test
 
 sites:
     - map: laravel.homestead.test
