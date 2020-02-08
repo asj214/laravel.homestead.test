@@ -33,11 +33,11 @@
                         <tr>
                             <td>{{ $banner->id }}</td>
                             <td>
-                                @if($banner->attachment->path)
+                                @isset($banner->attachment->path)
                                 <a href="{{ route('adm.banners.edit', ['id' => $banner->id]) }}">
                                     <img src="{{ asset($banner->attachment->path) }}" style="width: 150px;" />
                                 </a>
-                                @endif
+                                @endisset
                             </td>
                             <td>
                                 <a href="{{ route('adm.banners.edit', ['id' => $banner->id]) }}">{{ $banner->title }}</a>
