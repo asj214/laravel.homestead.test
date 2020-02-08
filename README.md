@@ -30,8 +30,22 @@ vagrant reload --provision
 ```
 
 ## hosts 파일 수정
-* Mac: `sudo vi /etc/hosts`
-* Windows: `C:\Windows\System32\drivers\etc\hosts`
+* Mac 위치: `/etc/hosts`
+* Windows 위치: `C:\Windows\System32\drivers\etc\hosts`
 ```
 192.168.10.10   laraval.homestead.test
 ```
+
+## laravel 밑 작업
+1. 가상머신 실행 `vagrant up`
+2. 가상머신 접속 `vagrant ssh`
+3. laravel.homestead.test 경로로 이동 `cd /home/vagrant/Code/laravel.homestead.test/`
+4. 패키지 설치 `composer update`
+5. .env 파일에 database 정보 입력
+    ```
+    host: 127.0.0.1
+    port: 3306
+    database: homestead
+    username: homestead
+    password: secret
+    ```
