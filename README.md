@@ -4,10 +4,9 @@
 - homestead.
 - laravel 5.8.
 
-> ## homestead
-> * List
->   ```
->   ---
+## homestead
+```
+---
 ip: "192.168.10.10"
 memory: 2048
 cpus: 2
@@ -41,5 +40,4 @@ features:
 #     - send: 7777
 #       to: 777
 #       protocol: udp
-
->   ```
+```
