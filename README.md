@@ -28,3 +28,10 @@ vagrant ssh
 # homestead.yml 수정 후 적용 시킬때
 vagrant reload --provision
 ```
+
+## hosts 파일 수정
+* Mac: `sudo vi /etc/hosts`
+* Windows: `C:\Windows\System32\drivers\etc\hosts`
+```
+192.168.10.10   laraval.homestead.test
+```
