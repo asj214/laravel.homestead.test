@@ -36,17 +36,36 @@ vagrant reload --provision
 192.168.10.10   laraval.homestead.test
 ```
 
-## laravel 밑 작업
+## database
+* 각자의 컴퓨터에서 접속 시
+    ```
+    host: 127.0.0.1
+    port: 33060
+    database: homestead.laravel.test
+    username: homestead
+    password: secret
+    ```
+* `.env` 파일 상에서
+    ```
+    host: 127.0.0.1
+    port: 3306
+    database: homestead.laravel.test
+    username: homestead
+    password: secret
+    ```
+
+## 초기 작업
 1. 가상머신 실행 `vagrant up`
 2. 가상머신 접속 `vagrant ssh`
 3. laravel.homestead.test 경로로 이동 `cd /home/vagrant/Code/laravel.homestead.test/`
 4. 패키지 설치 `composer update`
 5. `.env` 파일에 database 정보 입력
     ```
-    host: 127.0.0.1
-    port: 3306
-    database: homestead
-    username: homestead
-    password: secret
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=laravel.homestead.test
+    DB_USERNAME=homestead
+    DB_PASSWORD=secret
     ```
 6. 마이그레이션 `artisan migrate`
