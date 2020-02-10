@@ -1,4 +1,7 @@
-<?php
+# seeder 사용기
+
+1. 팩토리 생성: `artisan make:factory UserFactory`
+```php
 use App\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
@@ -20,3 +23,23 @@ $factory->define(User::class, function (Faker $faker){
     ];
 
 });
+```
+2. 시더 생성: `artisan make:seeder UserTableSeeder`
+```php
+use App\User;
+use Illuminate\Database\Seeder;
+
+class UserTableSeeder extends Seeder {
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run(){
+        factory(User::class, 30)->create();
+    }
+
+}
+
+```
+3. 시더 마이그레이션: `artisan db:seed --class=UserTableSeeder`

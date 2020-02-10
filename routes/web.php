@@ -25,6 +25,10 @@ Route::get('users/{id}/edit', 'UserController@edit')->name('users.edit');
 
 Route::group(['prefix' => 'adm', 'name' => 'adm.', 'middleware' => 'auth'], function(){
 
+    Route::get('/', function(){
+        return redirect()->route('adm.users.index');
+    });
+
     Route::get('users', 'adm\\UserController@index')->name('adm.users.index');
     Route::get('users/{id}/edit', 'adm\\UserController@edit')->name('adm.users.edit');
     Route::match(['put', 'patch'], 'users/{id}/update', 'adm\\UserController@update')->name('adm.users.update');
@@ -33,8 +37,6 @@ Route::group(['prefix' => 'adm', 'name' => 'adm.', 'middleware' => 'auth'], func
     Route::get('users/{id}/boards', 'adm\\UserController@boards')->name('adm.users.boards');
     Route::get('users/{id}/comments', 'adm\\UserController@comments')->name('adm.users.comments');
 
-
-    // Route::resource('banners', 'adm\\BannerController', ['as' => 'adm']);
     Route::get('banners', 'adm\\BannerController@index')->name('adm.banners.index');
     Route::get('banners/create', 'adm\\BannerController@create')->name('adm.banners.create');
     Route::post('banners/store', 'adm\\BannerController@store')->name('adm.banners.store');
