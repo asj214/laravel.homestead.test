@@ -43,3 +43,7 @@ class UserTableSeeder extends Seeder {
 
 ```
 3. 시더 마이그레이션: `artisan db:seed --class=UserTableSeeder`
+
+
+시더를 한번 사용해보니 테스트 데이터가 쉽게쉽게 쌓여서 여러가지로 편하다.
+이런걸 익숙하게 쓰기만하면 개발 속도가 많이 올라갈거 같다.
