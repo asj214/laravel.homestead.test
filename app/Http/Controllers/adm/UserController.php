@@ -13,11 +13,29 @@ use App\Attachment;
 
 class UserController extends Controller {
     //
-    public function index(){
+    public function index(Request $request){
 
         $per_page = 15;
 
         $users = User::orderBy('id', 'desc');
+
+        if(!empty($request->search_type) && !empty($request->search_value)){
+
+            if($request->search_type == "email"){
+                $users = $users->where('email', $request->search_value);
+            }
+
+            if($request->search_type == "name"){
+                $users = $users->where('name', $request->search_value);
+            }
+
+        }
+
+        $params = array(
+            "search_type" => $request->search_type,
+            "search_value" => $request->search_value
+        );
+
         $users = $users->paginate($per_page);
 
         // echo "<pre>";
@@ -25,7 +43,7 @@ class UserController extends Controller {
         // echo "</pre>";
         // exit;
 
-        return view('adm.users.list', compact('users'));
+        return view('adm.users.list', compact('users', 'params'));
 
     }
 

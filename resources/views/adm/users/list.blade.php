@@ -6,14 +6,30 @@
         <div class="panel panel-default">
             <div class="panel-heading">Search</div>
             <div class="panel-body">
+                <form class="form-inline" action="{{ route('adm.users.index') }}">
+                    <input type="hidden" name="page" value="1" />
+                    <div class="form-group form-group-sm">
+                        <select name="search_type" class="form-control">
+                            <option value="">선택해주세요.</option>
+                            <option value="email" {{ ($params['search_type'] == "email") ? 'selected': '' }}>이메일</option>
+                            <option value="name" {{ ($params['search_type'] == "name") ? 'selected': '' }}>이름</option>
+                        </select>
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <input type="text" name="search_value" class="form-control" value="{{ $params['search_value'] }}" />
+                    </div>
+                    <input type="submit" class="btn btn-default btn-sm" value="검색" />
+                </form>
+            </div>
+            <div class="panel-body">
                 <div>
-                    <a href="{{ route('adm.banners.create') }}" class="btn btn-default">등록</a>
+                    <a href="{{ route('adm.banners.create') }}" class="btn btn-default btn-sm">등록</a>
                 </div>
             </div>
         </div>
 
         <div class="panel panel-default">
-            <div class="panel-heading">Toilet List</div>
+            <div class="panel-heading">User List</div>
             <div class="panel-body">
                 <table class="table table-striped table-condensed">
                     <thead>
@@ -39,6 +55,9 @@
                         @endforeach
                     </tbody>
                 </table>
+                <div>
+                {{ $users->links() }}
+                </div>
             </div>
         </div>
 

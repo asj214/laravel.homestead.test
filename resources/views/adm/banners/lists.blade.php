@@ -7,13 +7,13 @@
             <div class="panel-heading">Search</div>
             <div class="panel-body">
                 <div>
-                    <a href="{{ route('adm.banners.create') }}" class="btn btn-default">등록</a>
+                    <a href="{{ route('adm.banners.create') }}" class="btn btn-default btn-sm">등록</a>
                 </div>
             </div>
         </div>
 
         <div class="panel panel-default">
-            <div class="panel-heading">Toilet List</div>
+            <div class="panel-heading">Banner List</div>
             <div class="panel-body">
                 <table class="table table-striped table-condensed">
                     <thead>
