@@ -23,7 +23,7 @@ Route::get('users/{id}/boards', 'UserController@boards')->name('users.boards');
 Route::get('users/{id}/comments', 'UserController@comments')->name('users.comments');
 Route::get('users/{id}/edit', 'UserController@edit')->name('users.edit');
 
-Route::group(['prefix' => 'adm', 'name' => 'adm.', 'middleware' => 'auth'], function(){
+Route::group(['prefix' => 'adm', 'name' => 'adm.', 'middleware' => ['auth', 'can:isAdmin']], function(){
 
     Route::get('/', function(){
         return redirect()->route('adm.users.index');
