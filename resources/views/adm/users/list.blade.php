@@ -56,7 +56,7 @@
                     </tbody>
                 </table>
                 <div>
-                {{ $users->links() }}
+                {{ $users->appends(['search_type' => $params['search_type'], 'search_value' => $params['search_value']])->links() }}
                 </div>
             </div>
         </div>

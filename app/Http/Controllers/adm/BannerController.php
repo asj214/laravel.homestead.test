@@ -29,19 +29,31 @@ class BannerController extends Controller {
     }
 
     //
-    public function index(){
+    public function index(Request $request){
 
         $per_page = 15;
 
+        $params = array(
+            'category_id' => $request->category_id,
+            'sub_category_id' => $request->sub_category_id
+        );
+
+        $categorys = BannerCategory::whereNull('parent_id')->get();
+        $sub_categorys = array();
+
         $banners = Banner::with(['user'])->orderBy('id', 'desc');
+
+        if(!empty($params['category_id'])){
+            $sub_categorys = BannerCategory::where('parent_id', $params['category_id'])->get();
+            $banners = $banners->where('category_id', $params['category_id']);
+        }
+
+        if(!empty($params['sub_category_id'])) $banners = $banners->where('sub_category_id', $params['sub_category_id']);
+
         $banners = $banners->paginate($per_page);
 
-        // echo "<pre>";
-        // print_r($banners->toArray());
-        // echo "</pre>";
-        // exit;
+        return view('adm.banners.lists', compact('banners', 'params', 'categorys', 'sub_categorys'));
 
-        return view('adm.banners.lists', compact('banners'));
     }
 
     public function create(){
