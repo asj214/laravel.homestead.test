@@ -66,3 +66,4 @@
 
 ## 라라벨 작업 시 익숙해질때까지 까먹지 말아야할 녀석들
 1. [Factory, Seed](https://github.com/asj214/laravel.homestead.test/blob/master/docs/seeder.md)
+2. [Gate](https://github.com/asj214/laravel.homestead.test/blob/master/docs/gate.md)
