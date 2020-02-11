@@ -1,6 +1,6 @@
 ## Gate 정리
 
-### 사용자 등급에 따른 접근 권한 체크 시 사용
+어드민 페이지 접근 권한 체크 시 사용함
 
 #### App/Providers/AuthServiceProvider.php GATE 등록
 ```php
@@ -45,3 +45,6 @@ public function private(){
 ```
 
 #### 라우트에서 사용할때
+```php
+Route::group(['prefix' => 'adm', 'name' => 'adm.', 'middleware' => ['auth', 'can:isAdmin']], function(){
+```
