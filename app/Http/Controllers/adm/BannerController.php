@@ -41,14 +41,17 @@ class BannerController extends Controller {
         $categorys = BannerCategory::whereNull('parent_id')->get();
         $sub_categorys = array();
 
+        if(!empty($params['category_id'])) $sub_categorys = BannerCategory::where('parent_id', $params['category_id'])->get();
+
         $banners = Banner::with(['user'])->orderBy('id', 'desc');
 
-        if(!empty($params['category_id'])){
-            $sub_categorys = BannerCategory::where('parent_id', $params['category_id'])->get();
-            $banners = $banners->where('category_id', $params['category_id']);
-        }
+        $banners = $banners->when($params['category_id'], function($query, $category_id){
+            return $query->where('category_id', $category_id);
+        });
 
-        if(!empty($params['sub_category_id'])) $banners = $banners->where('sub_category_id', $params['sub_category_id']);
+        $banners = $banners->when($params['sub_category_id'], function($query, $sub_category_id){
+            return $query->where('sub_category_id', $sub_category_id);
+        });
 
         $banners = $banners->paginate($per_page);
 

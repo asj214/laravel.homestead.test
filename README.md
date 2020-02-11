@@ -64,6 +64,6 @@
     >**참고**: Windows 환경에서는 cmd 창을 관리자 권한으로 실행 시킨 후 링크를 적용시켜야 가능하다.
 
 
-## 라라벨 작업 시 익숙해질때까지 까먹지 말아야할 녀석들
+## 알고있으면 도움되는 부분들
 1. [Factory, Seed](https://github.com/asj214/laravel.homestead.test/blob/master/docs/seeder.md)
 2. [Gate](https://github.com/asj214/laravel.homestead.test/blob/master/docs/gate.md)
