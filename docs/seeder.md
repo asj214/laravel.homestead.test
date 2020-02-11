@@ -47,3 +47,33 @@ class UserTableSeeder extends Seeder {
 
 시더를 한번 사용해보니 테스트 데이터가 쉽게쉽게 쌓여서 여러가지로 편하다.
 이런걸 익숙하게 쓰기만하면 개발 속도가 많이 올라갈거 같다.
+
+
+### 페이커에 한글 데이터 심기
+
+[참고 링크](https://sir.kr/so_phpframework/220)
+
+* 프로젝트 내 `Lorem.php` 파일을 `vendor/fzaninotto/faker/src/Faker/Provider/ko_kr` 로 카피
+* 잘쓰면 된다.
+```php
+use App\Board;
+use Faker\Generator as Faker;
+
+$factory->define(Board::class, function (Faker $faker) {
+
+    $faker = \Faker\Factory::create('ko_kr');
+    $date = \Carbon\Carbon::create(2020, 2, 10, 0, 0, 0);
+
+    return [
+        'user_id' => rand(1, 63),
+        'title' => $faker->comment,
+        'body' => $faker->content,
+        'view_cnt' => rand(0, 100),
+        'like_cnt' => 0,
+        'comment_cnt' => 0,
+        'created_at' => $date->format('Y-m-d H:i:s'),
+        'updated_at' => $date->addWeeks(rand(1, 51))->format('Y-m-d H:i:s')
+    ];
+
+});
+```

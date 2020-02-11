@@ -8,9 +8,10 @@
         </div>
         @foreach($boards as $board)
         <div class="col-md-8 col-xs-12">
-            @if($board->thumbnail)
             <div class="card mb-4">
+                @if($board->thumbnail)
                 <img src="{{ asset($board->thumbnail->path) }}" class="card-img-top" />
+                @endif
                 <div class="card-body">
                     <h5 class="card-title">
                         <a href="{{ route('boards.show', ['id' => $board->id]) }}">{{ $board->title }}</a>
@@ -21,10 +22,9 @@
                     <i class="far fa-comment-dots"></i>&nbsp;{{ $board->comment_cnt }}
                 </div>
             </div>
-            @endif
         </div>
         @endforeach
-        <div class="col-md-12 col-xs-12">
+        <div class="col-md-8 col-xs-12">
             {{ $boards->links() }}
         </div>
     </div>
