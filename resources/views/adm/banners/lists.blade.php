@@ -73,7 +73,7 @@
                     </tbody>
                 </table>
                 <div>
-                {{ $banners->appends(['category_id' => $params['category_id', 'sub_category_id' => $params['sub_category_id']]])->links() }}
+                {{ $banners->appends(['category_id' => $params['category_id'], 'sub_category_id' => $params['sub_category_id']])->links() }}
                 </div>
             </div>
         </div>
