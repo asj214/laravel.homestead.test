@@ -43,7 +43,7 @@ class UserTableSeeder extends Seeder {
 
 ```
 3. 시더 마이그레이션: `artisan db:seed --class=UserTableSeeder`
-    >**참고**: 다른 pc에서 git clone 받은 후 사용이 안될때 'Class UserTableSeeder does not exist'.
+    <b>다른 pc에서 git clone 받은 후 사용이 안될때 'Class UserTableSeeder does not exist' 에러가 나오는 경우.</b>
     `composer dump-autoload` 입력 후 다시 시도
 
 시더를 한번 사용해보니 테스트 데이터가 쉽게쉽게 쌓여서 여러가지로 편하다.
