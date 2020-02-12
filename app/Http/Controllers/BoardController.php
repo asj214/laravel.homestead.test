@@ -32,14 +32,6 @@ class BoardController extends Controller {
             $current_user_likes = Like::where('like_type', 'boards')->where('user_id', $user_id)->whereIn('like_id', Arr::pluck($boards, 'id'))->pluck('like_id')->toArray();
         }
 
-        // echo $user_id;
-        // exit;
-
-        // echo "<pre>";
-        // print_r($current_user_likes);
-        // echo "</pre>";
-        // exit;
-
         return view('board.lists', compact('boards', 'user_id', 'current_user_likes'));
 
     }
@@ -89,11 +81,6 @@ class BoardController extends Controller {
             $current_user_like = Like::where('like_id', $id)->where('like_type', 'boards')->where('user_id', Auth::id())->exists();
             $comment_likes = Like::where('like_type', 'comments')->where('user_id', Auth::id())->whereIn('like_id', Arr::pluck($board->comments, 'id'))->pluck('like_id')->toArray();
         }
-
-        // echo "<pre>";
-        // print_r($comment_likes);
-        // echo "</pre>";
-        // exit;
 
         return view('board.show', compact('board', 'current_user_like', 'comment_likes'));
 
@@ -184,7 +171,6 @@ class BoardController extends Controller {
 
         $comment = Comment::find($id);
         $comment->delete();
-        // Comment::where('commentable_type', 'boards')->where('commentable_id', $id)->delete();
 
         Board::find($comment->commentable_id)->decrement('comment_cnt');
 
