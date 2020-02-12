@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Http\Request;
 
 use App\Board;
@@ -25,12 +25,22 @@ class BoardController extends Controller {
         $boards = Board::orderBy('id', 'desc');
         $boards = $boards->paginate($per_page);
 
+        $user_id = Auth::id();
+        $current_user_likes = array();
+
+        if($user_id){
+            $current_user_likes = Like::where('like_type', 'boards')->where('user_id', $user_id)->whereIn('like_id', Arr::pluck($boards, 'id'))->pluck('like_id')->toArray();
+        }
+
+        // echo $user_id;
+        // exit;
+
         // echo "<pre>";
-        // print_r($boards->toArray());
+        // print_r($current_user_likes);
         // echo "</pre>";
         // exit;
 
-        return view('board.lists', compact('boards'));
+        return view('board.lists', compact('boards', 'user_id', 'current_user_likes'));
 
     }
 
@@ -72,7 +82,20 @@ class BoardController extends Controller {
 
         $board = Board::with('comments.user_avatar')->find($id);
 
-        return view('board.show', compact('board'));
+        $current_user_like = 0;
+        $comment_likes = array();
+
+        if(Auth::id()){
+            $current_user_like = Like::where('like_id', $id)->where('like_type', 'boards')->where('user_id', Auth::id())->exists();
+            $comment_likes = Like::where('like_type', 'comments')->where('user_id', Auth::id())->whereIn('like_id', Arr::pluck($board->comments, 'id'))->pluck('like_id')->toArray();
+        }
+
+        // echo "<pre>";
+        // print_r($comment_likes);
+        // echo "</pre>";
+        // exit;
+
+        return view('board.show', compact('board', 'current_user_like', 'comment_likes'));
 
     }
 
@@ -125,18 +148,16 @@ class BoardController extends Controller {
         $like->user_id = Auth::id();
         $like->save();
 
-        $board = Board::find($id);
-        $board->increment('like_cnt');
+        Board::find($id)->increment('like_cnt');
+
+        return redirect()->route('boards.show', ['id' => $id]);
 
     }
 
     public function unlike(Request $request, $id){
-
         Like::where('like_type', 'boards')->where('like_id', $id)->where('user_id', Auth::id())->delete();
-
-        $board = Board::find($id);
-        $board->decrement('like_cnt');
-
+        Board::find($id)->decrement('like_cnt');
+        return redirect()->route('boards.show', ['id' => $id]);
     }
 
     public function comments(Request $request, $id){
@@ -161,12 +182,13 @@ class BoardController extends Controller {
 
     public function remove_comments(Request $request, $id){
 
-        Comment::where('commentable_type', 'boards')->where('commentable_id', $id)->delete();
+        $comment = Comment::find($id);
+        $comment->delete();
+        // Comment::where('commentable_type', 'boards')->where('commentable_id', $id)->delete();
 
-        $board = Board::find($id);
-        $board->decrement('comment_cnt');
+        Board::find($comment->commentable_id)->decrement('comment_cnt');
 
-        return redirect()->route('boards.show', ['id' => $id]);
+        return redirect()->route('boards.show', ['id' => $comment->commentable_id]);
 
     }
 

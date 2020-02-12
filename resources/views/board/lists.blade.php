@@ -19,7 +19,8 @@
                     <p class="card-text">{!! nl2br($board->body) !!}</p>
                 </div>
                 <div class="card-body custom-box">
-                    <i class="far fa-comment-dots"></i>&nbsp;{{ $board->comment_cnt }}
+                    <a href="javascript:void(0);"><i class="far fa-comment-dots"></i>&nbsp;{{ $board->comment_cnt }}</a>
+                    <a href="javascript:void(0);"><i class="{{ (in_array($board->id, $current_user_likes)) ? 'fas': 'far' }} fa-heart"></i>&nbsp;{{ $board->like_cnt }}</a>
                 </div>
             </div>
         </div>
@@ -29,37 +30,4 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-$(document).ready(function(){
-
-    $('body').on('click', '.btn-like', function(){
-
-        var board_id = $(this).data('board_id');
-        var url = '{{ url("/boards") }}/'+board_id+'/like';
-        var method = 'POST';
-
-        $.ajax({
-            url: url,
-            type: method, // GET, POST
-            dataType: 'json', // html, text
-            async: false,
-            data: { "_token": "{{ csrf_token() }}" }
-        }).done(function(r){
-
-            if(r.current_user_like != null){
-                $('.btn-board-like').removeClass("off").addClass("on").find(".count_number").text(r.like_count);
-            } else {
-                $('.btn-board-like').removeClass("on").addClass("off").find(".count_number").text(r.like_count);
-            }
-
-        });
-
-        alert(url);
-
-    });
-
-
-
-});
-</script>
 @endsection

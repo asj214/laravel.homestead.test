@@ -25,6 +25,18 @@
                         </form>
                         @endif
                     </div>
+                    <div class="float-right">
+                        <a href="javascript:void(0);"><i class="far fa-comment-dots"></i>&nbsp;{{ $board->comment_cnt }}</a>
+                        <form id="board_like" style="display: inline" method="POST" action="{{ ($current_user_like == 1) ? route('boards.unlike', $board->id): route('boards.like', $board->id) }}">
+                            @csrf
+                            @if($current_user_like == 1)
+                            @method('delete')
+                            @endif
+                            <a href="javascript:void(0);" onclick="$('#board_like').submit();">
+                                <i class="{{ ($current_user_like == 1) ? 'fas': 'far' }} fa-heart"></i>&nbsp;{{ $board->like_cnt }}
+                            </a>
+                        </form>
+                    </div>
                 </div>
                 <hr />
                 <div class="card-body">
@@ -53,13 +65,34 @@
                                 <div>
                                     <div class="float-left">
                                         <a href="{{ route('users.show', ['id' => $comment->user_id]) }}"><b>{{ $comment->user->name }}</b></a>
-                                    </div>
-                                    <div class="float-right">
+                                        &nbsp;
                                         <span class="text-monospace">{{ $comment->created_at->format('Y.m.d') }}</span>
                                     </div>
+                                    @if($comment->user_id == Auth::id())
+                                    <div class="float-right">
+                                        <form method="POST" action="{{ route('boards.remove_comments', ['id' => $comment->id]) }}">
+                                            @csrf
+                                            @method('delete')
+                                            <input type="submit" class="btn btn-link" value="삭제" />
+                                        </form>
+                                    </div>
+                                    @endif
                                 </div>
                                 <br />
                                 <p>{!! nl2br($comment->body) !!}</p>
+                                <div class="media-body">
+                                    <div class="float-right">
+                                        <form method="post" action="{{ (in_array($comment->id, $comment_likes)) ? route('comments.unlike', $comment->id): route('comments.like', $comment->id) }}">
+                                            @csrf
+                                            @if(in_array($comment->id, $comment_likes))
+                                            @method('delete')
+                                            @endif
+                                            <button type="submit" class="btn btn-link">
+                                                <i class="{{ (in_array($comment->id, $comment_likes)) ? 'fas':'far' }} fa-heart"></i>&nbsp;{{ $comment->like_cnt }}
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </li>
                         @endforeach
