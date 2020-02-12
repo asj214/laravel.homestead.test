@@ -65,5 +65,5 @@
 
 
 ## 알고있으면 도움되는 부분들
-1. [Factory, Seed](https://github.com/asj214/laravel.homestead.test/blob/master/docs/seeder.md)
-2. [Gate](https://github.com/asj214/laravel.homestead.test/blob/master/docs/gate.md)
+1. [Factory, Seed](https://github.com/asj214/laravel.homestead.test/blob/master/note/seeder.md)
+2. [Gate](https://github.com/asj214/laravel.homestead.test/blob/master/note/gate.md)
