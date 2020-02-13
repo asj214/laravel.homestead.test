@@ -33,3 +33,6 @@ Homestead.json
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml
+
+# exceptions
+!/storage/app/public/assets/*
