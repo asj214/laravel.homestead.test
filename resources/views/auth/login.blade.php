@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
                 <div class="card-body">
@@ -41,9 +41,12 @@
                         </div>
                         <div class="form-group mt-2">
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary btn-block">{{ __('Login') }}</button>
-                                <a class="btn btn-light btn-block" href="{{ route('login.github') }}">
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">{{ __('Login') }}</button>
+                                <a class="btn btn-light btn-lg btn-block" href="{{ route('login.social', ['site' => 'github']) }}">
                                     <strong><i class="fab fa-github icon"></i> Login with Github</strong>
+                                </a>
+                                <a href="{{ route('login.social', ['site' => 'kakao']) }}" class="btn-block" style="background: #F7E317; text-align: center">
+                                    <img src="{{ asset('storage/assets/images/common/kakao_account_login_btn_medium_narrow.png') }}" />
                                 </a>
                             </div>
                         </div>

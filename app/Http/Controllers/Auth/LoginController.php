@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
+use App\User;
+
 use Socialite;
 
 class LoginController extends Controller {
@@ -22,27 +24,62 @@ class LoginController extends Controller {
         $user->update(['last_login_at' => date('Y-m-d H:i:s')]);
     }
 
-    public function redirectToProvider(){
+    public function redirectToProvider(Request $request, $site){
 
-        return Socialite::driver('github')->redirect();
+        $withs = ['kakao'];
+
+        if(in_array($site, $withs)){
+            return Socialite::with($site)->redirect();
+        } else {
+            return Socialite::driver($site)->redirect();
+        }
 
     }
 
-    public function handleProviderCallback(){
+    public function handleProviderCallback(Request $request, $site){
 
-        $driver = request()->segment(2); // github, etc ....
-        $user = Socialite::driver($driver)->user();
+        $driver = strtolower($site); // github, etc ....
+        $socialer = Socialite::driver($driver)->user();
 
-        $token = $user->token;
+        // $token = $socialer->token;
 
         // github
         // token, id, nickname, name, email, avatar
 
+        // kakao
+        // token, id, nickname, name, email, avatar
 
-        echo "<pre>";
-        print_r($user);
-        echo "</pre>";
+        // email 로 기존 계정 유무 판단.
+        $user = User::where('email', $socialer->email)->first();
 
+        if(!empty($user)){
+
+            if($user->social == 'local'){
+                $user->social = $driver;
+                $user->social_id = $socialer->id;
+                $user->save();
+            }
+
+        } else {
+
+            $crr_date = \Carbon\Carbon::now();
+
+            $user = User::create([
+                'social' => $driver,
+                'social_id' => $socialer->id,
+                'name' => ($socialer->name ?? 'unknown'),
+                'nickname' => ($socialer->nickname ?? 'unknown'),
+                'email' => $socialer->email,
+                'level' => 1,
+                'created_at' => $crr_date->format('Y-m-d H:i:s'),
+                'updated_at' => $crr_date->format('Y-m-d H:i:s')
+            ]);
+
+        }
+
+        $this->guard()->login($user);
+
+        return $this->sendLoginResponse($request);
 
     }
 

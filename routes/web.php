@@ -7,8 +7,8 @@ Route::get('/', function (){
 
 Auth::routes();
 
-Route::get('login/github', 'Auth\LoginController@redirectToProvider')->name('login.github');
-Route::get('login/github/callback', 'Auth\LoginController@handleProviderCallback')->name('login.github_callbak');
+Route::get('login/{site}', 'Auth\LoginController@redirectToProvider')->name('login.social');
+Route::get('login/{site}/callback', 'Auth\LoginController@handleProviderCallback')->name('login.social_callback');
 
 Route::get('/home', 'HomeController@index')->name('home');
 

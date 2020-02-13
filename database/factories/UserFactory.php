@@ -6,7 +6,7 @@ use Faker\Generator as Faker;
 
 $factory->define(User::class, function (Faker $faker){
 
-    $date = \Carbon\Carbon::create(2020, 1, 1, 0, 0, 0);
+    $crr_date = \Carbon\Carbon::now();
 
     return [
         'name' => $faker->name,
@@ -15,8 +15,8 @@ $factory->define(User::class, function (Faker $faker){
         'remember_token' => Str::random(10),
         'level' => 1,
         'last_login_at' => $date->addWeeks(rand(1, 51))->format('Y-m-d H:i:s'),
-        'created_at' => $date->format('Y-m-d H:i:s'),
-        'updated_at' => $date->format('Y-m-d H:i:s')
+        'created_at' => $crr_date->format('Y-m-d H:i:s'),
+        'updated_at' => $crr_date->format('Y-m-d H:i:s')
     ];
 
 });
