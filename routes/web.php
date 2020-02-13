@@ -7,6 +7,9 @@ Route::get('/', function (){
 
 Auth::routes();
 
+Route::get('login/github', 'Auth\LoginController@redirectToProvider')->name('login.github');
+Route::get('login/github/callback', 'Auth\LoginController@handleProviderCallback')->name('login.github_callbak');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('boards/{id}/like', 'BoardController@like')->name('boards.like');
