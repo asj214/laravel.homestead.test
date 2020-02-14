@@ -22,7 +22,7 @@ class BoardController extends Controller {
 
         $per_page = 15;
 
-        $boards = Board::orderBy('id', 'desc');
+        $boards = Board::with(['user', 'thumbnail'])->orderBy('id', 'desc');
         $boards = $boards->paginate($per_page);
 
         $user_id = Auth::id();
@@ -72,7 +72,7 @@ class BoardController extends Controller {
 
     public function show(Request $request, $id){
 
-        $board = Board::with('comments.user_avatar')->find($id);
+        $board = Board::with(['user', 'thumbnail', 'comments.user_avatar'])->find($id);
 
         $current_user_like = 0;
         $comment_likes = array();

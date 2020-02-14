@@ -4,22 +4,23 @@ namespace App\Http\Controllers\api\v1;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
 use App\Board;
+use App\Http\Resources\Board as BoardResource;
 
 class BoardController extends Controller {
 
     public function index(Request $request){
 
-        $board = Board::orderBy('id', 'desc');
-        $board = $board->paginate(15);
+        $boards = Board::with(['user', 'thumbnail'])->orderBy('id', 'desc');
+        $boards = $boards->paginate(15);
 
-        return response()->json($board);
+        return BoardResource::collection($boards);
 
     }
 
     public function show(Request $request, $id){
-        $board = Board::find($id);
-        return response()->json($board);
+        return new BoardResource(Board::with(['user', 'thumbnail', 'comments.user'])->find($id));
     }
 
     public function store(Request $request){

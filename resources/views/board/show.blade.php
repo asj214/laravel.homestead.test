@@ -56,7 +56,7 @@
                         <li class="media my-4">
                             <a href="{{ route('users.show', ['id' => $comment->user_id]) }}">
                                 @if(!empty($comment->user->avatar))
-                                <img src="{{ asset($comment->user->avatar->path) }}" class="mr-3 rounded-circle" style="width: 64px" />
+                                <img src="{{ $comment->user->avatar }}" class="mr-3 rounded-circle" style="width: 64px" />
                                 @else
                                 <img src="https://via.placeholder.com/64" class="mr-3 rounded-circle" />
                                 @endif
