@@ -22,8 +22,8 @@ class Board extends JsonResource {
             'like_cnt' => $this->like_cnt,
             'comment_cnt' => $this->comment_cnt,
             'comments' => CommentResource::collection($this->whenLoaded('comments')),
-            'created_at' => $this->created_at->format('Y-m-d H:i:s'),
-            'updated_at' => $this->updated_at->format('Y-m-d H:i:s')
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at
         ];
 
     }

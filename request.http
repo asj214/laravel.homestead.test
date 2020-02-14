@@ -30,8 +30,8 @@ PUT http://laravel.homestead.test/api/v1/boards/100 HTTP/1.1
 Content-Type: application/json
 
 {
-    "title": "라라벨 씨발",
-    "body": "졸라 어려워!!!"
+    "title": "안녕하세요. 하하하하하",
+    "body": "라라벨 이제는 좀 쉽다."
 }
 
 ###

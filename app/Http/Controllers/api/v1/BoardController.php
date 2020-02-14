@@ -50,13 +50,12 @@ class BoardController extends Controller {
             'body' => 'required'
         ]);
 
-        $board = Board::find($id);
+        $board = Board::with(['user', 'thumbnail', 'comments.user'])->find($id);
         $board->title = $request->title;
         $board->body = $request->body;
         $board->save();
 
-        $board = Board::find($id);
-        return response()->json($board);
+        return new BoardResource($board);
 
     }
 
