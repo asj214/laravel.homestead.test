@@ -48,16 +48,8 @@ class UserController extends Controller {
     }
 
     public function edit(Request $request, $id){
-
-        $user = User::with(['avatar'])->find($id);
-
-        // echo "<pre>";
-        // print_r($user->toArray());
-        // echo "</pre>";
-        // exit;
-
+        $user = User::find($id);
         return view('adm.users.form', compact('user'));
-
     }
 
     public function update(Request $request, $id){
@@ -68,24 +60,16 @@ class UserController extends Controller {
         ]);
 
         $user = User::find($id);
-        if(!empty($request->password)){
-            $user->password = Hash::make($request->password);
-        }
+        if(!empty($request->password)) $user->password = Hash::make($request->password);
 
         $user->level = $request->level;
-        $user->save();
-
+        
         if($request->hasFile('attachment')){
-
             $path = $request->file('attachment')->store('public/upfiles/users/avatar');
-
-            $attachment = new Attachment();
-            $attachment->attachment_id = $id;
-            $attachment->attachment_type = 'avatar';
-            $attachment->path = str_replace("public", "storage", $path);
-            $attachment->save();
-
+            $user->avatar = asset(str_replace("public", "storage", $path));
         }
+
+        $user->save();
 
         return redirect()->route('adm.users.index');
 

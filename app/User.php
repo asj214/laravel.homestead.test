@@ -37,12 +37,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // protected $with = ['avatar'];
-
-    public function avatar(){
-        return $this->hasOne(Attachment::class, 'attachment_id')->where('attachment_type', 'avatar')->orderBy('id', 'desc');
-    }
-
     public function boards(){
         return $this->hasMany(Board::class, 'user_id');
     }
