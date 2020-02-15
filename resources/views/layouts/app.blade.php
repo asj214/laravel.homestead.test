@@ -10,8 +10,9 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ mix('js/app.js') }}" defer></script>
-    <script src="{{ mix('js/jquery.bxslider.min.js') }}" defer></script>
+    <script src="/js/manifest.js"></script>
+    <script src="/js/vendor.js"></script>
+    <script src="{{ mix('js/app.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -19,7 +20,6 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/jquery.bxslider.min.css') }}" rel="stylesheet">
     <style>
     .custom-box .on { font-weight: bold; color: #3490dc; }
     .custom-box .off { font-weight: normal; color: #aaa; }

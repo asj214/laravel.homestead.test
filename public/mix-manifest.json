@@ -1,6 +1,6 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
-    "/css/jquery.bxslider.min.css": "/css/jquery.bxslider.min.css",
-    "/js/jquery.bxslider.min.js": "/js/jquery.bxslider.min.js"
+    "/js/manifest.js": "/js/manifest.js",
+    "/js/vendor.js": "/js/vendor.js"
 }
