@@ -62,7 +62,8 @@
 6. 마이그레이션 `artisan migrate`
 7. 첨부파일 링크 설정: `artisan storage:link`
     >**참고**: Windows 환경에서는 cmd 창을 관리자 권한으로 실행 시킨 후 링크를 적용시켜야 가능하다.
-
+8. `npm install`
+9. `npm run dev` or `npm run prod`
 
 ## 알고있으면 도움되는 부분들
 1. [Factory, Seed](https://github.com/asj214/laravel.homestead.test/blob/master/note/seeder.md)
