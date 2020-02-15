@@ -13,3 +13,8 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');
+
+mix.copy('node_modules/bxslider/dist/jquery.bxslider.min.css', 'public/css/jquery.bxslider.min.css');
+mix.copy('node_modules/bxslider/dist/jquery.bxslider.min.js', 'public/js/jquery.bxslider.min.js');
+
+//mix.copyDirectory('resources/img', 'public/img');

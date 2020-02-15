@@ -12,6 +12,7 @@
     "devDependencies": {
         "axios": "^0.19",
         "bootstrap": "^4.1.0",
+        "bxslider": "^4.2.9",
         "cross-env": "^5.1",
         "jquery": "^3.2",
         "laravel-mix": "^4.0.7",
@@ -22,7 +23,6 @@
         "sass-loader": "^7.1.0",
         "three": "^0.113.2",
         "vanta": "^0.5.10",
-        "vue": "^2.5.17",
         "vue-template-compiler": "^2.6.11"
     }
 }
