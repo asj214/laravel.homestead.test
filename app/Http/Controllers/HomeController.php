@@ -17,7 +17,7 @@ class HomeController extends Controller {
         $banners = Banner::where('sub_category_id', 2)
                     ->where('started_at', '<=', $crr_date)
                     ->where('finished_at', '>=', $crr_date)
-                    ->where('display_yn', 'Y')->get();
+                    ->where('display_yn', 'Y')->orderBy('id', 'desc')->get();
 
 
 
