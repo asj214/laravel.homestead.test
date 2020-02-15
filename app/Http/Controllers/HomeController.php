@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Banner;
 
 class HomeController extends Controller {
 
@@ -11,7 +12,17 @@ class HomeController extends Controller {
     // }
 
     public function index(){
-        return view('home');
+
+        $crr_date = date('Y-m-d H:i:s');
+        $banners = Banner::where('sub_category_id', 2)
+                    ->where('started_at', '<=', $crr_date)
+                    ->where('finished_at', '>=', $crr_date)
+                    ->where('display_yn', 'Y')->get();
+
+
+
+
+        return view('home', compact('banners'));
     }
 
 }
