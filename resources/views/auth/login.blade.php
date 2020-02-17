@@ -46,7 +46,7 @@
                                     <strong><i class="fab fa-github icon"></i> Login with Github</strong>
                                 </a>
                                 <a href="{{ route('login.social', ['site' => 'kakao']) }}" class="btn-block" style="background: #F7E317; text-align: center">
-                                    <img src="{{ asset('storage/assets/images/common/kakao_account_login_btn_medium_narrow.png') }}" />
+                                    <img src="{{ asset('/images/common/kakao_account_login_btn_medium_narrow.png') }}" />
                                 </a>
                             </div>
                         </div>
