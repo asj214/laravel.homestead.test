@@ -72,7 +72,7 @@ class BoardController extends Controller {
 
     public function show(Request $request, $id){
 
-        $board = Board::with(['user', 'thumbnail', 'comments.user_avatar'])->find($id);
+        $board = Board::with(['user', 'thumbnail', 'comments'])->find($id);
 
         $current_user_like = 0;
         $comment_likes = array();
