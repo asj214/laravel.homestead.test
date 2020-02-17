@@ -7,5 +7,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::group(['prefix' => 'v1'], function(){
-    Route::resource('boards', 'api\\v1\\BoardController');
+
+    Route::get('boards', 'api\\v1\\BoardController@index')->name('api.v1.boards.index');
+    Route::post('boards', 'api\\v1\\BoardController@store')->name('api.v1.boards.store');
+    Route::get('boards/{id}', 'api\\v1\\BoardController@show')->name('api.v1.boards.show');
+    Route::match(['patch', 'put'], 'boards/{id}', 'api\\v1\\BoardController@update')->name('api.v1.boards.update');
+    Route::delete('boards/{id}', 'BoardController@destroy')->name('api.v1.boards.destroy');
+
 });

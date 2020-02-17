@@ -66,7 +66,7 @@ class UserController extends Controller {
         if(!empty($request->password)) $user->password = Hash::make($request->password);
 
         $user->level = $request->level;
-        
+
         // if($request->hasFile('avatar')){
         //     $path = $request->file('avatar')->store('public/upfiles/users/avatar');
         //     $user->avatar = asset(str_replace("public", "storage", $path));
