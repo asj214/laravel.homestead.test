@@ -28,6 +28,7 @@ Route::get('users/{id}', 'UserController@show')->name('users.show');
 Route::get('users/{id}/boards', 'UserController@boards')->name('users.boards');
 Route::get('users/{id}/comments', 'UserController@comments')->name('users.comments');
 Route::get('users/{id}/edit', 'UserController@edit')->name('users.edit');
+Route::match(['patch', 'put'], 'users/{id}', 'UserController@update')->name('users.update');
 
 Route::group(['prefix' => 'adm', 'name' => 'adm.', 'middleware' => ['auth', 'can:isAdmin']], function(){
 

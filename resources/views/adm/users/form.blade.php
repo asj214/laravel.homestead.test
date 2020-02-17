@@ -49,7 +49,7 @@
 						<label class="col-md-2 control-label">프로필 사진</label>
 						<div class="col-md-10">
                             <div>
-			                    <input type="file" name="attachment" class="form-control" />
+			                    <input type="file" name="avatar" class="form-control" />
                             </div>
                             @isset($user->avatar->path)
                             <div style="margin-top: 5px;">

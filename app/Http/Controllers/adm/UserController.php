@@ -4,12 +4,15 @@ namespace App\Http\Controllers\adm;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 
 use App\User;
 use App\Board;
 use App\Comment;
 use App\Attachment;
+
+use Image;
 
 class UserController extends Controller {
     //
@@ -64,9 +67,31 @@ class UserController extends Controller {
 
         $user->level = $request->level;
         
-        if($request->hasFile('attachment')){
-            $path = $request->file('attachment')->store('public/upfiles/users/avatar');
-            $user->avatar = asset(str_replace("public", "storage", $path));
+        // if($request->hasFile('avatar')){
+        //     $path = $request->file('avatar')->store('public/upfiles/users/avatar');
+        //     $user->avatar = asset(str_replace("public", "storage", $path));
+        // }
+
+        if($request->hasFile('avatar')){
+
+            $input = $request->file('avatar');
+
+            $ext = $input->getClientOriginalExtension();
+
+            $filename = Str::random(15).'.'.$ext;
+            $base_path = '/home/vagrant/Code/laravel.homestead.test/storage/app/public';
+            $path = $base_path.'/upfiles/users/avatar/'.$filename;
+
+            $image = Image::make($input->getRealPath());
+            $image->resize(64, 64, function($constraint){
+                $constraint->aspectRatio();
+            });
+
+            $image->save($path);
+
+            // $path = $request->file('avatar')->store('public/upfiles/users/avatar');
+            $user->avatar = asset(str_replace("$base_path", "storage", $path));
+
         }
 
         $user->save();
