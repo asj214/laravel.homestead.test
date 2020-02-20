@@ -39,8 +39,8 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <li><a href="{{ route('boards.index') }}">boards</a></li>
-                        <li><a href="{{ route('gallerys.index') }}">gallerys</a></li>
+                        <li class="nav-item"><a href="{{ route('boards.index') }}" class="nav-link">boards</a></li>
+                        <li class="nav-item"><a href="{{ route('gallerys.index') }}" class="nav-link">gallerys</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
