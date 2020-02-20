@@ -21,6 +21,16 @@ Route::resources([
     'boards' => 'BoardController'
 ]);
 
+
+Route::get('gallerys', 'GalleryController@index')->name('gallerys.index');
+Route::get('gallerys/create', 'GalleryController@create')->name('gallerys.create');
+Route::post('gallerys', 'GalleryController@store')->name('gallerys.store');
+Route::get('gallerys/{id}', 'GalleryController@show')->name('gallerys.show');
+Route::get('gallerys/{id}/edit', 'GalleryController@edit')->name('gallerys.edit');
+Route::match(['patch', 'put'], 'gallerys/{id}', 'GalleryController@update')->name('gallerys.update');
+Route::delete('gallerys/{id}', 'GalleryController@destroy')->name('gallerys.destroy');
+
+
 Route::post('comments/{id}/like', 'CommentController@like')->name('comments.like');
 Route::delete('comments/{id}/like', 'CommentController@unlike')->name('comments.unlike');
 

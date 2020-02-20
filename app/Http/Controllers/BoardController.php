@@ -22,8 +22,7 @@ class BoardController extends Controller {
 
         $per_page = 15;
 
-        $boards = Board::with(['user', 'thumbnail'])->orderBy('id', 'desc');
-        $boards = $boards->paginate($per_page);
+        $boards = Board::with(['user', 'thumbnail'])->where('bbs_type', 1)->orderBy('id', 'desc')->paginate($per_page);
 
         $user_id = Auth::id();
         $current_user_likes = array();
@@ -49,6 +48,7 @@ class BoardController extends Controller {
         ]);
 
         $board = new Board();
+        $board->bbs_type = 1;
         $board->title = $request->title;
         $board->body = $request->body;
         $board->user_id = Auth::id();
@@ -87,10 +87,8 @@ class BoardController extends Controller {
     }
 
     public function edit(Request $request, $id){
-
         $board = Board::find($id);
         return view('board.edit', compact('board'));
-
     }
 
     public function update(Request $request, $id){

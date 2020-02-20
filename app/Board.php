@@ -23,6 +23,10 @@ class Board extends Model {
         return $this->hasOne(Attachment::class, 'attachment_id')->where('attachment_type', 'boards')->orderBy('id', 'desc');
     }
 
+    public function attachments(){
+        return $this->hasMany(Attachment::class, 'attachment_id')->where('attachment_type', 'boards');
+    }
+
     public function comments(){
         return $this->hasMany(Comment::class, 'commentable_id')->where('commentable_type', 'boards')->orderBy('id', 'desc');
     }

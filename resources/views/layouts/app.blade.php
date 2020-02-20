@@ -40,6 +40,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li><a href="{{ route('boards.index') }}">boards</a></li>
+                        <li><a href="{{ route('gallerys.index') }}">gallerys</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
