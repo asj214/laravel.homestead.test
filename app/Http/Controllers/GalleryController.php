@@ -98,6 +98,8 @@ class GalleryController extends Controller {
     }
 
     public function destory(Reqeust $request, $id){
+        Board::destroy($id);
+        return redirect()->route('boards.index');
     }
     
 }
