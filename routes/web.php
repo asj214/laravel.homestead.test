@@ -63,5 +63,11 @@ Route::group(['prefix' => 'adm', 'name' => 'adm.', 'middleware' => ['auth', 'can
 
     Route::get('banners/categorys', 'adm\\BannerController@categorys')->name('adm.banners.categorys');
 
+    Route::get('surveys', 'adm\\SurveyController@index')->name('adm.surveys.index');
+    Route::get('surveys/create', 'adm\\SurveyController@create')->name('adm.surveys.create');
+    Route::post('surveys/store', 'adm\\SurveyController@store')->name('adm.surveys.store');
+    Route::get('surveys/{id}/edit', 'adm\\SurveyController@edit')->name('adm.surveys.edit');
+    Route::match(['put', 'patch'], 'surveys/{id}/update', 'adm\\SurveyController@update')->name('adm.surveys.update');
+    Route::delete('surveys/{id}/destroy', 'adm\\SurveyController@destroy')->name('adm.surveys.destroy');
 
 });

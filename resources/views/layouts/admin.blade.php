@@ -16,6 +16,7 @@
 	<script src="{{ asset('js/lumino/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/lumino/bootstrap-datepicker.js') }}"></script>
 	<script src="{{ asset('js/datetimepicker/jquery.datetimepicker.full.min.js') }}"></script>
+	<script src="{{ asset('vendor/tinymce/tinymce.min.js') }}"></script>
 </head>
 <body>
 
@@ -56,6 +57,9 @@
 		</li>
         <li {!! (Request::segment(2) == "banners" ? 'class="active"': '') !!}>
 			<a href="{{ route('adm.banners.index') }}"><em class="fa fa-film">&nbsp;</em> Banner</a>
+		</li>
+		<li {!! (Request::segment(2) == "surveys" ? 'class="active"': '') !!}>
+			<a href="{{ route('adm.surveys.index') }}"><em class="fa fa-film">&nbsp;</em> Survey</a>
 		</li>
         <li>
 			<a href="javascript:void(0);" id="btn-logout"><em class="fa fa-power-off">&nbsp;</em> Logout</a>
