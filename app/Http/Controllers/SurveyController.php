@@ -18,6 +18,16 @@ class SurveyController extends Controller {
     public function create(Request $request, $event_id){
 
         $survey_cfg = SurveyConfig::find($event_id);
+
+        # 회원만 참여가능한지 구분
+        if($survey_cfg->authenticate == 'Y'){
+            # 로그인 안한 사람
+            if(Auth::check() == false) return redirect()->route('login');
+            # 이미 참여한 사람
+            if(Survey::where('survey_id', $event_id)->where('user_id', Auth::id())->exists() == true) return redirect(url()->previous());
+        }
+
+        # 수집항목
         $collects = json_decode($survey_cfg->personal_infomations, true);
         $privates = (empty($collects)) ? []: array_keys($collects);
 
@@ -34,12 +44,21 @@ class SurveyController extends Controller {
 
         $survey_cfg = SurveyConfig::find($event_id);
 
+        # 회원만 참여가능한지 구분
+        if($survey_cfg->authenticate == 'Y'){
+            # 로그인 안한 사람
+            if(Auth::check() == false) return redirect()->route('login');
+            # 이미 참여한 사람
+            if(Survey::where('survey_id', $event_id)->where('user_id', Auth::id())->exists() == true) return redirect(url()->previous());
+        }
+
         $rules = [
             'name' => 'required|min:2'
         ];
 
         $collects = json_decode($survey_cfg->personal_infomations, true);
 
+        # 기본적인 검증 대상 + 관리자에서 설정한 개인정보 수집항목 폼 검증
         $request->validate(array_merge($rules, $collects));
 
         $survey = new Survey();
@@ -51,6 +70,9 @@ class SurveyController extends Controller {
         $survey->birth = $request->birth;
         $survey->phone = $request->phone;
         $survey->save();
+
+        # 참여자수 증가
+        SurveyConfig::find($event_id)->increment('applicant_count');
 
         return redirect()->route('home');
 
