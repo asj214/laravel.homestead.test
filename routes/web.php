@@ -30,7 +30,6 @@ Route::get('gallerys/{id}/edit', 'GalleryController@edit')->name('gallerys.edit'
 Route::match(['patch', 'put'], 'gallerys/{id}', 'GalleryController@update')->name('gallerys.update');
 Route::delete('gallerys/{id}', 'GalleryController@destroy')->name('gallerys.destroy');
 
-
 Route::post('comments/{id}/like', 'CommentController@like')->name('comments.like');
 Route::delete('comments/{id}/like', 'CommentController@unlike')->name('comments.unlike');
 
@@ -39,6 +38,11 @@ Route::get('users/{id}/boards', 'UserController@boards')->name('users.boards');
 Route::get('users/{id}/comments', 'UserController@comments')->name('users.comments');
 Route::get('users/{id}/edit', 'UserController@edit')->name('users.edit');
 Route::match(['patch', 'put'], 'users/{id}', 'UserController@update')->name('users.update');
+
+# user survey
+Route::get('surveys/{event_id}', 'SurveyController@show')->name('surveys.show');
+Route::get('surveys/{event_id}/create', 'SurveyController@create')->name('surveys.create');
+Route::post('surveys/{event_id}', 'SurveyController@store')->name('surveys.store');
 
 Route::group(['prefix' => 'adm', 'name' => 'adm.', 'middleware' => ['auth', 'can:isAdmin']], function(){
 

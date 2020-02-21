@@ -103,7 +103,12 @@ class SurveyController extends Controller {
 
     public function edit(Request $request, $id){
 
-        $survey_cfg = SurveyConfig::find($id);
+        $survey_cfg = SurveyConfig::with(['applicants.user'])->find($id);
+
+        // echo "<pre>";
+        // print_r($survey_cfg->toArray());
+        // echo "</pre>";
+        // exit;
 
         $route = route('adm.surveys.update', ['id' => $id]);
         $period_yn = $survey_cfg->period_yn;

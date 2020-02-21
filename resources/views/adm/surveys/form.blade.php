@@ -129,6 +129,51 @@
 
     </div>
 
+
+    <div class="col-lg-10">
+        <div class="panel panel-default">
+            <div class="panel-heading clearfix">신청자 목록</div>
+			<div class="panel-body">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>아이디</th>
+                            <th>이름</th>
+                            <th>성별</th>
+                            <th>생년월일</th>
+                            <th>연락처</th>
+                            <th>이메일</th>
+                            <th>신청일</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if(count($survey_cfg->applicants) == 0)
+                        <tr>
+                            <td colspan="8">신청자가 없습니다.</td>
+                        </tr>
+                        @else
+                        @foreach($survey_cfg->applicants as $applicant)
+                        <tr>
+                            <td>{{ $applicant->id }}</td>
+                            <td>{{ $applicant->user_id }}</td>
+                            <td>{{ $applicant->name }}</td>
+                            <td>{{ $applicant->gender }}</td>
+                            <td>{{ $applicant->birth }}</td>
+                            <td>{{ $applicant->phone }}</td>
+                            <td>{{ $applicant->email }}</td>
+                            <td>{{ $applicant->created_at }}</td>
+                        </tr>
+                        @endforeach
+                        @endif
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
 </div>
 <script type="text/javascript">
 $(document).ready(function(){
