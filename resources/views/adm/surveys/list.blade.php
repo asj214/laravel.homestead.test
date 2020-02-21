@@ -22,6 +22,7 @@
                             <th>이벤트명</th>
                             <th>요약</th>
                             <th>이벤트 기간</th>
+                            <th>참여자수</th>
                             <th>수집 항목</th>
                             <th>작성자</th>
                             <th>생성일</th>
@@ -38,6 +39,7 @@
                             @else
                             <td>상시</td>
                             @endif
+                            <td>{{ number_format($cfg->applicant_count) }}</td>
                             <td>{{ $privates[$cfg->id] }}</td>
                             <td>{{ $cfg->user->name }}</td>
                             <td>{{ $cfg->created_at->format('Y.m.d') }}</td>
