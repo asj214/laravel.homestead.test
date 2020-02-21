@@ -10,8 +10,8 @@
                 @foreach($banners as $banner)
                     @isset($banner->attachment->path)
                     <a href="{{ $banner->link_url ?? 'javascript:void(0);' }}">
-                        <!-- <img src="{{ asset($banner->attachment->path) }}" class="card-img-top" /> -->
-                        <img src="https://via.placeholder.com/600x200" class="card-img-top" />
+                        <img src="{{ asset($banner->attachment->path) }}" class="card-img-top" />
+                        <!-- <img src="https://via.placeholder.com/600x200" class="card-img-top" /> -->
                     </a>
                     @endisset
                 @endforeach
