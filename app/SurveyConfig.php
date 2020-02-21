@@ -9,11 +9,11 @@ class SurveyConfig extends Model {
     //
     use SoftDeletes;
 
-    protected $table = "boards";
+    protected $table = "survey_configs";
     protected $dates = ['deleted_at'];
 
-
-
-
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 
 }

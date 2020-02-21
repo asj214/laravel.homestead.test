@@ -4,7 +4,7 @@
 
     <div class="col-lg-10">
 
-        @if ($errors->any())
+        @if($errors->any())
         <div class="alert alert-danger">
             <ul>
                 @foreach ($errors->all() as $error)
@@ -20,16 +20,19 @@
 
 				<form id="frm-survey" class="form-horizontal row-border" method="POST" action="{{ $route }}" enctype="multipart/form-data">
                     @csrf
+                    @isset($survey_cfg->id)
+                    @method('patch')
+                    @endisset
 					<div class="form-group form-group-sm">
 						<label class="col-md-2 control-label">이벤트명</label>
 						<div class="col-md-10">
-							<input type="text" name="name" class="form-control" />
+							<input type="text" name="name" class="form-control" value="{{ $survey_cfg->name ?? old('name') }}" />
 						</div>
 					</div>
 					<div class="form-group form-group-sm">
 						<label class="col-md-2 control-label">소개</label>
 						<div class="col-md-10">
-							<input type="text" name="intro" class="form-control" value="{{ $banner->intro ?? '' }}" />
+							<input type="text" name="intro" class="form-control" value="{{ $survey_cfg->name ?? old('intro') }}" />
 						</div>
 					</div>
 
@@ -53,42 +56,70 @@
 						<div class="col-md-10">
 							<div class="row">
 								<div class="col-xs-6">
-									<input type="text" name="started_at" class="form-control datepicker" placeholder="시작일">
+									<input type="text" name="started_at" class="form-control datepicker" placeholder="시작일" value="{{ $survey_cfg->started_at ?? old('started_at') }}">
 								</div>
 								<div class="col-xs-6">
-									<input type="text" name="finished_at" class="form-control datepicker" placeholder="종료일">
+									<input type="text" name="finished_at" class="form-control datepicker" placeholder="종료일" value="{{ $survey_cfg->finished_at ?? old('finished_at') }}">
 								</div>
 							</div>
 						</div>
 					</div>
 
                     <div class="form-group form-group-sm">
+						<label class="col-md-2 control-label">수집 항목</label>
+						<div class="col-md-10">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="personal_infomations[]" value="birth" {{ in_array('birth', $personal_infomations) ? 'checked': '' }} />생년월일
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="personal_infomations[]" value="gender" {{ in_array('gender', $personal_infomations) ? 'checked': '' }} />성별
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="personal_infomations[]" value="email" {{ in_array('email', $personal_infomations) ? 'checked': '' }} />이메일
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="personal_infomations[]" value="phone" {{ in_array('phone', $personal_infomations) ? 'checked': '' }} />전화번호
+                                </label>
+                            </div>
+                            
+						</div>
+					</div>
+
+                    <div class="form-group form-group-sm">
                         <label class="col-md-2 control-label" form="descr">관련 소개 글</label>
                         <div class="col-md-10">
-                            <textarea name="descr" id="descr"></textarea>
+                            <textarea name="descr" id="descr">{{ $survey_cfg->descr ?? old('descr') }}</textarea>
                         </div>
 					</div>
+
                     <div class="form-group form-group-sm">
                         <label class="col-md-2 control-label" form="policy">개인정보약관</label>
                         <div class="col-md-10">
-                            <textarea name="policy" id="policy"></textarea>
+                            <textarea name="policy" id="policy">{{ $survey_cfg->policy ?? old('policy') }}</textarea>
                         </div>
 					</div>
                     <div class="form-group form-group-sm">
                         <label class="col-md-2 control-label" form="marketing_terms">마케팅정보활용약관</label>
                         <div class="col-md-10">
-                            <textarea name="marketing_terms" id="marketing_terms"></textarea>
+                            <textarea name="marketing_terms" id="marketing_terms">{{ $survey_cfg->marketing_terms ?? old('marketing_terms') }}</textarea>
                         </div>
 					</div>
 
 				</form>
 			</div>
             <div class="panel-footer">
-                <button type="button" class="btn btn-primary" onclick="$('#frm-banner').submit();">등록</button>
-                <a href="{{ route('adm.banners.index') }}" class="btn btn-default">목록</a>
-                @isset($banner->id)
+                <button type="button" class="btn btn-primary" onclick="$('#frm-survey').submit();">등록</button>
+                <a href="{{ route('adm.surveys.index') }}" class="btn btn-default">목록</a>
+                @isset($survey_cfg->id)
                 <button type="button" class="btn btn-danger" onclick="$('#frm-delete').submit();">삭제</button>
-                <form id="frm-delete" action="{{ route('adm.banners.destroy', ['id' => $banner->id]) }}" method="post">
+                <form id="frm-delete" action="{{ route('adm.surveys.destroy', ['id' => $survey_cfg->id]) }}" method="post">
                     @csrf
                     @method('delete')
                 </form>

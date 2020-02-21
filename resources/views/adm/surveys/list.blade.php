@@ -3,7 +3,6 @@
 <div class="row">
     <div class="col-lg-12">
 
-
         <div class="panel panel-default">
             <div class="panel-heading">Search</div>
             <div class="panel-body">
@@ -20,14 +19,30 @@
                     <thead>
                         <tr>
                             <th>id</th>
-                            <th>이름</th>
-                            <th>이메일</th>
-                            <th>레벨</th>
-                            <th>최근 접속일</th>
-                            <th>가입일</th>
+                            <th>이벤트명</th>
+                            <th>요약</th>
+                            <th>이벤트 기간</th>
+                            <th>수집 항목</th>
+                            <th>작성자</th>
+                            <th>생성일</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($survey_cfgs as $cfg)
+                        <tr>
+                            <td>{{ $cfg->id }}</td>
+                            <td><a href="{{ route('adm.surveys.edit', ['id' => $cfg->id]) }}">{{ $cfg->name }}</a></td>
+                            <td>{{ $cfg->intro }}</td>
+                            @if($cfg->period_yn == 'Y')
+                            <td>{{ $cfg->started_at }} ~ {{ $cfg->finished_at }}</td>
+                            @else
+                            <td>상시</td>
+                            @endif
+                            <td>{{ $privates[$cfg->id] }}</td>
+                            <td>{{ $cfg->user->name }}</td>
+                            <td>{{ $cfg->created_at->format('Y.m.d') }}</td>
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
 
