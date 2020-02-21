@@ -66,6 +66,22 @@
 					</div>
 
                     <div class="form-group form-group-sm">
+						<label class="col-md-2 control-label">비회원 허용</label>
+						<div class="col-md-10">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="authenticate" value="Y" {{ $authenticate == 'Y' ? 'checked': '' }} />허용안함
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="authenticate" value="N" {{ $authenticate == 'N' ? 'checked': '' }} />허용
+                                </label>
+                            </div>
+						</div>
+					</div>
+
+                    <div class="form-group form-group-sm">
 						<label class="col-md-2 control-label">수집 항목</label>
 						<div class="col-md-10">
                             <div class="checkbox">

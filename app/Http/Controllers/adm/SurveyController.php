@@ -15,7 +15,8 @@ class SurveyController extends Controller {
         return [
             'name' => 'required|max:255',
             'intro' => 'required',
-            'period_yn' => 'required'
+            'period_yn' => 'required',
+            'authenticate' => 'required'
         ];
     }
 
@@ -68,9 +69,10 @@ class SurveyController extends Controller {
 
         $route = route('adm.surveys.store');
         $period_yn = (!empty(old('period_yn'))) ? old('period_yn'): 'N';
+        $authenticate = (!empty(old('authenticate'))) ? old('authenticate'): 'Y';
         $personal_infomations = (!empty(old('personal_infomations'))) ? old('personal_infomations'): [];
 
-        return view('adm.surveys.form', compact('route', 'period_yn', 'personal_infomations'));
+        return view('adm.surveys.form', compact('route', 'period_yn', 'authenticate', 'personal_infomations'));
 
     }
 
@@ -89,6 +91,7 @@ class SurveyController extends Controller {
         $survey_cfg->user_id = Auth::id();
         $survey_cfg->intro = $request->intro;
         $survey_cfg->period_yn = $request->period_yn;
+        $survey_cfg->authenticate = $request->authenticate;
         $survey_cfg->started_at = $request->started_at;
         $survey_cfg->finished_at = $request->finished_at;
         $survey_cfg->descr = $request->descr;
@@ -112,11 +115,12 @@ class SurveyController extends Controller {
 
         $route = route('adm.surveys.update', ['id' => $id]);
         $period_yn = $survey_cfg->period_yn;
+        $authenticate = $survey_cfg->authenticate;
 
         $terms = json_decode($survey_cfg->personal_infomations, true);
         $personal_infomations = (empty($terms)) ? []: array_keys($terms);
 
-        return view('adm.surveys.form', compact('route', 'survey_cfg', 'period_yn', 'personal_infomations'));
+        return view('adm.surveys.form', compact('route', 'survey_cfg', 'period_yn', 'authenticate', 'personal_infomations'));
 
     }
 
@@ -135,6 +139,7 @@ class SurveyController extends Controller {
         $survey_cfg->user_id = Auth::id();
         $survey_cfg->intro = $request->intro;
         $survey_cfg->period_yn = $request->period_yn;
+        $survey_cfg->authenticate = $request->authenticate;
         $survey_cfg->started_at = $request->started_at;
         $survey_cfg->finished_at = $request->finished_at;
         $survey_cfg->descr = $request->descr;
