@@ -145,7 +145,7 @@
 
     </div>
 
-
+    @isset($survey_cfg)
     <div class="col-lg-10">
         <div class="panel panel-default">
             <div class="panel-heading clearfix">신청자 목록</div>
@@ -189,7 +189,7 @@
             </div>
         </div>
     </div>
-
+    @endisset
 </div>
 <script type="text/javascript">
 $(document).ready(function(){

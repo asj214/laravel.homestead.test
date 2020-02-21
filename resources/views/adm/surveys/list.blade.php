@@ -47,7 +47,9 @@
                         @endforeach
                     </tbody>
                 </table>
-
+                <div>
+                {{ $survey_cfgs->links() }}
+                </div>
             </div>
         </div>
 

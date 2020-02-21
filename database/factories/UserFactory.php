@@ -14,7 +14,7 @@ $factory->define(User::class, function (Faker $faker){
         'password' => Hash::make('1234'), // password
         'remember_token' => Str::random(10),
         'level' => 1,
-        'last_login_at' => $date->addWeeks(rand(1, 51))->format('Y-m-d H:i:s'),
+        'last_login_at' => $crr_date->addWeeks(rand(1, 51))->format('Y-m-d H:i:s'),
         'created_at' => $crr_date->format('Y-m-d H:i:s'),
         'updated_at' => $crr_date->format('Y-m-d H:i:s')
     ];

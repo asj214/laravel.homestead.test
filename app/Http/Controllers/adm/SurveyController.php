@@ -108,11 +108,6 @@ class SurveyController extends Controller {
 
         $survey_cfg = SurveyConfig::with(['applicants.user'])->find($id);
 
-        // echo "<pre>";
-        // print_r($survey_cfg->toArray());
-        // echo "</pre>";
-        // exit;
-
         $route = route('adm.surveys.update', ['id' => $id]);
         $period_yn = $survey_cfg->period_yn;
         $authenticate = $survey_cfg->authenticate;
