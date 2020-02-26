@@ -28,7 +28,7 @@
                 </div>
                 <div class="form-group">
                     <label for="attachments">attachments</label>
-                    <input type="file" class="form-control" name="attachments" id="attachments" />
+                    <input type="file" class="form-control" name="attachments[]" id="attachments" multiple />
                 </div>
                 <button type="submit" class="btn btn-primary">Sign in</button>
                 <a href="{{ route('gallerys.index') }}" class="btn btn-outline-primary">List</a>

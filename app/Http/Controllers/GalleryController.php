@@ -30,6 +30,11 @@ class GalleryController extends Controller {
             $current_user_likes = Like::where('like_type', 'boards')->where('user_id', $user_id)->whereIn('like_id', Arr::pluck($boards, 'id'))->pluck('like_id')->toArray();
         }
 
+        // echo "<pre>";
+        // print_r($boards->toArray());
+        // echo "</pre>";
+        // exit;
+
         return view('gallerys.list', compact('boards', 'user_id', 'current_user_likes'));
 
     }
@@ -43,7 +48,7 @@ class GalleryController extends Controller {
         $validatedData = $request->validate([
             'title' => 'required|max:255',
             'body' => 'required',
-            'attachments' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            // 'attachments' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
         $board = new Board();
@@ -56,13 +61,17 @@ class GalleryController extends Controller {
 
         if($request->hasFile('attachments')){
 
-            $path = $request->file('attachments')->store('public/upfiles/gallery');
+            foreach($request->file('attachments') as $upfile){
+                
+                $path = $upfile->store('public/upfiles/gallery');
 
-            $attachment = new Attachment();
-            $attachment->attachment_id = $board->id;
-            $attachment->attachment_type = 'boards';
-            $attachment->path = str_replace("public", "storage", $path);
-            $attachment->save();
+                $attachment = new Attachment();
+                $attachment->attachment_id = $board->id;
+                $attachment->attachment_type = 'boards';
+                $attachment->path = str_replace("public", "storage", $path);
+                $attachment->save();
+
+            }
 
         }
 
