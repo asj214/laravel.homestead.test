@@ -22,16 +22,16 @@ class UserController extends Controller {
 
         $users = User::orderBy('id', 'desc');
 
-        if(!empty($request->search_type) && !empty($request->search_value)){
+        if($request->search_type == "email"){
+            $users = $users->when($request->search_value, function($query, $sch_value){
+                return $query->where('email', $sch_value);
+            });
+        }
 
-            if($request->search_type == "email"){
-                $users = $users->where('email', $request->search_value);
-            }
-
-            if($request->search_type == "name"){
-                $users = $users->where('name', $request->search_value);
-            }
-
+        if($request->search_type == "name"){
+            $users = $users->when($request->search_value, function($query, $sch_value){
+                return $query->where('name', $sch_value);
+            });
         }
 
         $params = array(
