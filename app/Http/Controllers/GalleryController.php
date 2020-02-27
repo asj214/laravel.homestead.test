@@ -43,7 +43,7 @@ class GalleryController extends Controller {
         $validatedData = $request->validate([
             'title' => 'required|max:255',
             'body' => 'required',
-            // 'attachments' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'attachments.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
         $board = new Board();
