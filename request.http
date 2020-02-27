@@ -39,3 +39,16 @@ Content-Type: application/json
 ###
 ### 게시글 삭제
 DELETE http://laravel.homestead.test/api/v1/boards/57 HTTP/1.1
+
+
+###
+### banners
+GET http://laravel.homestead.test/api/v1/banners
+Content-Type: application/json
+
+{
+    "page": 1,
+    "per_page": 20,
+    "category_id": 1,
+    "sub_category_id": 2
+}
