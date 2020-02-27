@@ -34,7 +34,7 @@ class GalleryController extends Controller {
 
     }
 
-    private static $rules = [
+    private $rules = [
         'title' => 'required|max:255',
         'body' => 'required',
         'attachments.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
@@ -88,6 +88,11 @@ class GalleryController extends Controller {
             $comment_likes = Like::where('like_type', 'comments')->where('user_id', Auth::id())->whereIn('like_id', Arr::pluck($board->comments, 'id'))->pluck('like_id')->toArray();
         }
 
+        // echo "<pre>";
+        // print_r($board->toArray());
+        // echo "</pre>";
+        // exit;
+
         return view('gallerys.show', compact('board', 'current_user_like', 'comment_likes'));
 
     }
@@ -98,6 +103,34 @@ class GalleryController extends Controller {
     }
 
     public function update(Request $request, $id){
+
+        $request->validate($this->rules);
+
+        $board = Board::find($id);
+        $board->user_id = Auth::id();
+        $board->title = $request->title;
+        $board->body = $request->body;
+        $board->view_cnt = 0;
+        $board->save();
+
+        if($request->hasFile('attachments')){
+
+            foreach($request->file('attachments') as $upfile){
+                
+                $path = $upfile->store('public/upfiles/gallery');
+
+                $attachment = new Attachment();
+                $attachment->attachment_id = $board->id;
+                $attachment->attachment_type = 'boards';
+                $attachment->path = str_replace("public", "storage", $path);
+                $attachment->save();
+
+            }
+
+        }
+
+        return redirect()->route('gallerys.show', ['id' => $board->id]);
+
     }
 
     public function destory(Request $request, $id){
