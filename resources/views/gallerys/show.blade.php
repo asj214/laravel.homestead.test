@@ -7,7 +7,12 @@
 
             <div class="card">
                 @isset($board->attachments)
-                <img src="{{ asset($board->attachments[0]->path) }}" class="card-img-top" />
+                <div class="carousel">
+                    @foreach($board->attachments as $attachment)
+                    <img src="{{ asset($attachment->path) }}" class="card-img-top" />
+                    @endforeach
+                </div>
+                
                 @endisset
                 <div class="card-body">
                     <h5 class="card-title">{{ $board->title }}</h5>
@@ -103,4 +108,22 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+$(document).ready(function(){
+
+    $('.carousel').bxSlider({
+		mode: 'horizontal',
+		speed: 400,
+		captions: false,
+		controls: false,
+		auto: true,
+		autoControls: false,
+		stopAutoOnClick: true,
+		autoDelay: 0,
+		pager: false,
+		infiniteLoop: true
+	});
+    
+});
+</script>
 @endsection

@@ -11,9 +11,13 @@
     <div class="row justify-content-center">
         <div class="col-md-6 col-xs-12">
             <div class="card mb-4">
-                @isset($board->attachments)
-                <img src="{{ asset($board->attachments[0]->path) }}" class="card-img-top" />
-                @endisset
+                <div class="carousel">
+                    @isset($board->attachments)
+                    @foreach($board->attachments as $attachment)
+                    <img src="{{ asset($attachment->path) }}" class="card-img-top" />
+                    @endforeach
+                    @endisset
+                </div>
                 <div class="card-body">
                     <h5 class="card-title">
                         <a href="{{ route('boards.show', ['id' => $board->id]) }}">{{ $board->title }}</a>
@@ -34,4 +38,22 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+$(document).ready(function(){
+
+    $('.carousel').bxSlider({
+		mode: 'horizontal',
+		speed: 400,
+		captions: false,
+		controls: false,
+		auto: true,
+		autoControls: false,
+		stopAutoOnClick: true,
+		autoDelay: 0,
+		pager: false,
+		infiniteLoop: true
+	});
+    
+});
+</script>
 @endsection
