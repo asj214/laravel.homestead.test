@@ -12,15 +12,21 @@ class BoardController extends Controller {
 
     public function index(Request $request){
 
-        $boards = Board::with(['user', 'thumbnail'])->orderBy('id', 'desc');
-        $boards = $boards->paginate(15);
+        $per_page = $request->input('per_page', 15);
+        $bbs_type = $request->input('bbs_type', 1);
+
+        $boards = Board::with(['user', 'attachments'])->when($bbs_type, function($query, $bbs_type){
+            return $query->where('bbs_type', $bbs_type);
+        })->orderBy('id', 'desc');
+
+        $boards = $boards->paginate($per_page);
 
         return BoardResource::collection($boards);
 
     }
 
     public function show(Request $request, $id){
-        return new BoardResource(Board::with(['user', 'thumbnail', 'comments.user'])->find($id));
+        return new BoardResource(Board::with(['user', 'attachments', 'comments.user'])->find($id));
     }
 
     public function store(Request $request){

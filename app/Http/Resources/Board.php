@@ -17,7 +17,16 @@ class Board extends JsonResource {
             'user' => new UserResource($this->whenLoaded('user')),
             'title' => $this->title,
             'body' => $this->body,
-            'thumbnail' => $this->thumbnail,
+            'attachments' => $this->when($this->attachments, function(){
+
+                $ret = [];
+                foreach($this->attachments as $attachment){
+                    $ret[] = asset($attachment->path);
+                }
+
+                return $ret;
+
+            }),
             'view_cnt' => $this->view_cnt,
             'like_cnt' => $this->like_cnt,
             'comment_cnt' => $this->comment_cnt,
