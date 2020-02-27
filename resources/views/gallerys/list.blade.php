@@ -20,7 +20,7 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">
-                        <a href="{{ route('boards.show', ['id' => $board->id]) }}">{{ $board->title }}</a>
+                        <a href="{{ route('gallerys.show', ['id' => $board->id]) }}">{{ $board->title }}</a>
                     </h5>
                     <p class="card-text">{!! nl2br($board->body) !!}</p>
                 </div>

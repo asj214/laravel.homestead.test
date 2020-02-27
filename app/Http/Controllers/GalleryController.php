@@ -30,11 +30,6 @@ class GalleryController extends Controller {
             $current_user_likes = Like::where('like_type', 'boards')->where('user_id', $user_id)->whereIn('like_id', Arr::pluck($boards, 'id'))->pluck('like_id')->toArray();
         }
 
-        // echo "<pre>";
-        // print_r($boards->toArray());
-        // echo "</pre>";
-        // exit;
-
         return view('gallerys.list', compact('boards', 'user_id', 'current_user_likes'));
 
     }
@@ -90,11 +85,6 @@ class GalleryController extends Controller {
             $current_user_like = Like::where('like_id', $id)->where('like_type', 'boards')->where('user_id', Auth::id())->exists();
             $comment_likes = Like::where('like_type', 'comments')->where('user_id', Auth::id())->whereIn('like_id', Arr::pluck($board->comments, 'id'))->pluck('like_id')->toArray();
         }
-
-        // echo "<pre>";
-        // print_r($board->toArray());
-        // echo "</pre>";
-        // exit;
 
         return view('gallerys.show', compact('board', 'current_user_like', 'comment_likes'));
 

@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8 col-xs-12">
+        <div class="col-md-6 col-xs-12">
 
             <div class="card">
                 @isset($board->attachments)
@@ -20,11 +20,11 @@
                 </div>
                 <div class="card-body">
                     <div class="float-left">
-                        <a href="{{ route('boards.index') }}" class="card-link">List</a>
+                        <a href="{{ route('gallerys.index') }}" class="card-link">List</a>
                         @if(Auth::id() == $board->user_id)
-                        <a href="{{ route('boards.edit', ['id' => $board->id])}}" class="card-link">Modify</a>
+                        <a href="{{ route('gallerys.edit', ['id' => $board->id])}}" class="card-link">Modify</a>
                         <a href="javascript:void(0);" class="card-link text-danger" onclick="$('#frm-delete').submit();">Delete</a>
-                        <form id="frm-delete" action="{{ route('boards.destroy', ['id' => $board->id]) }}" method="post">
+                        <form id="frm-delete" action="{{ route('gallerys.destroy', ['id' => $board->id]) }}" method="post">
                             @csrf
                             @method('delete')
                         </form>
