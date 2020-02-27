@@ -14,4 +14,6 @@ Route::group(['prefix' => 'v1'], function(){
     Route::match(['patch', 'put'], 'boards/{id}', 'api\\v1\\BoardController@update')->name('api.v1.boards.update');
     Route::delete('boards/{id}', 'BoardController@destroy')->name('api.v1.boards.destroy');
 
+    Route::get('banners', 'api\\v1\\BannerController@index');
+
 });
