@@ -15,16 +15,13 @@
             @endif
             <form method="post" action="{{ route('gallerys.store') }}" enctype="multipart/form-data">
                 @csrf
-                @isset($board->id)
-                @method('patch')
-                @endisset
                 <div class="form-group">
                     <label for="title">Title</label>
-                    <input type="text" class="form-control" name="title" id="title" placeholder="press input">
+                    <input type="text" class="form-control" name="title" id="title" placeholder="press input" value="{{ old('title') }}">
                 </div>
                 <div class="form-group">
                     <label for="body">Body</label>
-                    <textarea class="form-control" name="body" id="body"></textarea>
+                    <textarea class="form-control" name="body" id="body">{{ old('title') }}</textarea>
                 </div>
                 <div class="form-group">
                     <label for="attachments">attachments</label>

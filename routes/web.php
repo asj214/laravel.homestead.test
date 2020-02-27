@@ -39,6 +39,10 @@ Route::get('users/{id}/comments', 'UserController@comments')->name('users.commen
 Route::get('users/{id}/edit', 'UserController@edit')->name('users.edit');
 Route::match(['patch', 'put'], 'users/{id}', 'UserController@update')->name('users.update');
 
+# attachment
+Route::delete('attachments/{id}', 'AttachmentController@destroy')->name('attachments.destroy');
+
+
 # user survey
 Route::get('surveys/{event_id}', 'SurveyController@show')->name('surveys.show');
 Route::get('surveys/{event_id}/create', 'SurveyController@create')->name('surveys.create');

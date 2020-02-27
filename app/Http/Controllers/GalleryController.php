@@ -34,17 +34,19 @@ class GalleryController extends Controller {
 
     }
 
+    private static $rules = [
+        'title' => 'required|max:255',
+        'body' => 'required',
+        'attachments.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+    ];
+
     public function create(){
         return view('gallerys.form');
     }
 
     public function store(Request $request){
 
-        $validatedData = $request->validate([
-            'title' => 'required|max:255',
-            'body' => 'required',
-            'attachments.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-        ]);
+        $validatedData = $request->validate($this->rules);
 
         $board = new Board();
         $board->user_id = Auth::id();
@@ -90,15 +92,17 @@ class GalleryController extends Controller {
 
     }
 
-    public function edit(Reqeust $request, $id){
+    public function edit(Request $request, $id){
+        $board = Board::with(['attachments'])->find($id);
+        return view('gallerys.edit', compact('board'));
     }
 
-    public function update(Reqeust $request, $id){
+    public function update(Request $request, $id){
     }
 
-    public function destory(Reqeust $request, $id){
+    public function destory(Request $request, $id){
         Board::destroy($id);
         return redirect()->route('boards.index');
     }
-    
+
 }
