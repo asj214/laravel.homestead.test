@@ -13,7 +13,7 @@ Authorization: Bearer L5szPL6W358ZT5ZpMk6zH8cdvIr5JqLLAutOhEVdbcXPWZNYg32J1jeT7O
 
 ###
 ### 게시글 보기
-GET http://laravel.homestead.test/api/v1/boards/58
+GET http://laravel.homestead.test/api/v1/boards/112
 Content-Type: application/json
 Authorization: Bearer L5szPL6W358ZT5ZpMk6zH8cdvIr5JqLLAutOhEVdbcXPWZNYg32J1jeT7O8C
 
