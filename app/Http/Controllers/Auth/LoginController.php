@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+
+use Illuminate\Support\Str;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
@@ -67,6 +69,7 @@ class LoginController extends Controller {
             $user = User::create([
                 'social' => $driver,
                 'social_id' => $socialer->id,
+                'api_token' => Str::random(60),
                 'name' => ($socialer->name ?? 'unknown'),
                 'nickname' => ($socialer->nickname ?? 'unknown'),
                 'email' => $socialer->email,

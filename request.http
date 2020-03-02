@@ -64,3 +64,10 @@ Content-Type: application/json
     "user_id": 1,
     "body": "아버지는 나귀타고 장에 가시고...할머니는 건너마을 아저씨 댁에.."
 }
+
+
+### user
+
+GET http://laravel.homestead.test/api/user
+Content-Type: application/json
+Authorization: Bearer 3wSqZialvDBhaiutNEzTVIrzEF0ph0nNuykTvXz75ttLZf4DVdWLOSx0VssO
