@@ -1,26 +1,15 @@
 <?php
-
+use App\Board;
 use Illuminate\Database\Seeder;
-use App\Board as Board;
 
 class BoardTableSeeder extends Seeder {
-
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
     public function run(){
-
-        Board::truncate();
-
-        $faker = Faker\Factory::create();
-
-        for($i = 0; $i < 50; $i++){
-
-            Board::create([
-                'user_id' => 1,
-                'title' => $faker->sentence,
-                'body' => $faker->paragraph
-            ]);
-
-        }
-
+        factory(Board::class, 100)->create();
     }
 
 }
