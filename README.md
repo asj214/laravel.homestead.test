@@ -69,4 +69,5 @@
 1. [Factory, Seed](https://github.com/asj214/laravel.homestead.test/blob/master/note/seeder.md)
 2. [Gate](https://github.com/asj214/laravel.homestead.test/blob/master/note/gate.md)
 3. [Socialite](https://github.com/asj214/laravel.homestead.test/blob/master/note/socialite.md)
-3. [Resources](https://github.com/asj214/laravel.homestead.test/blob/master/note/resources.md)
+4. [Resources](https://github.com/asj214/laravel.homestead.test/blob/master/note/resources.md)
+5. [API사용자인증](https://github.com/asj214/laravel.homestead.test/blob/master/note/api_token.md)

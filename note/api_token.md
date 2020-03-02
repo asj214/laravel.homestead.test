@@ -79,3 +79,65 @@ GET http://laravel.homestead.test/api/user
 Content-Type: application/json
 Authorization: Bearer 3wSqZialvDBhaiutNEzTVIrzEF0ph0nNuykTvXz75ttLZf4DVdWLOSx0VssO
 ```
+
+### token 일괄 적용
+
+일괄 적용하는 방법에 대해서 더 좋은 방법이 생각이 나지 않았다.
+
+1. `composer require dirape/token`
+2. `app/Http/Auth/RegisterController.php` 모듈 적용
+```php
+use Dirape\Token\Token;
+...
+protected function create(array $data){
+    return User::create([
+        'social' => 'local',
+        'name' => $data['name'],
+        'nickname' => $data['nickname'],
+        'email' => $data['email'],
+        'password' => Hash::make($data['password']),
+        'api_token' => (new Token())->Unique('users', 'api_token', 60),
+    ]);
+}
+```
+3. `app/Http/Auth/LoginController.php`에 적용
+```php
+$user = User::create([
+    'social' => $driver,
+    'social_id' => $socialer->id,
+    'api_token' => (new Token())->Unique('users', 'api_token', 60),
+    'name' => ($socialer->name ?? 'unknown'),
+    'nickname' => ($socialer->nickname ?? 'unknown'),
+    'email' => $socialer->email,
+    'level' => 1,
+    'created_at' => $crr_date->format('Y-m-d H:i:s'),
+    'updated_at' => $crr_date->format('Y-m-d H:i:s')
+]);
+```
+
+4. `artisan make:seed UserApiToken`
+```php
+use App\User;
+use Dirape\Token\Token;
+use Illuminate\Database\Seeder;
+
+class UserApiToken extends Seeder {
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run(){
+        //
+        $users = User::all();
+
+        foreach($users as $user){
+            $user->update(['api_token' => (new Token())->Unique('users', 'api_token', 60)]);
+        }
+
+    }
+
+}
+```
+
+5. `artisan db:seed --class=UserApiToken`

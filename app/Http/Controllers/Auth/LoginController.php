@@ -8,9 +8,11 @@ use Illuminate\Support\Str;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
+
 use App\User;
 
 use Socialite;
+use Dirape\Token\Token;
 
 class LoginController extends Controller {
 
@@ -69,7 +71,7 @@ class LoginController extends Controller {
             $user = User::create([
                 'social' => $driver,
                 'social_id' => $socialer->id,
-                'api_token' => Str::random(60),
+                'api_token' => (new Token())->Unique('users', 'api_token', 60),
                 'name' => ($socialer->name ?? 'unknown'),
                 'nickname' => ($socialer->nickname ?? 'unknown'),
                 'email' => $socialer->email,
