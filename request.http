@@ -52,3 +52,15 @@ Content-Type: application/json
     "category_id": 1,
     "sub_category_id": 2
 }
+
+
+##
+### comment
+
+POST http://laravel.homestead.test/api/v1/boards/86/comment
+Content-Type: application/json
+
+{
+    "user_id": 1,
+    "body": "아버지는 나귀타고 장에 가시고...할머니는 건너마을 아저씨 댁에.."
+}

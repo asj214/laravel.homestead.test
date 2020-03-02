@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Board;
+use App\Comment;
 use App\Http\Resources\Board as BoardResource;
 
 class BoardController extends Controller {
@@ -76,5 +77,33 @@ class BoardController extends Controller {
         return response()->json($response);
 
     }
+
+    public function comment(Request $request, $id){
+
+        $validatedData = $request->validate([
+            'user_id' => 'required|numeric',
+            'body' => 'required'
+        ]);
+
+        $depth = $request->input('depth', 1);
+
+        $comment = new Comment();
+        $comment->commentable_type = 'boards';
+        $comment->commentable_id = $id;
+        $comment->user_id = $request->user_id;
+        $comment->body = $request->body;
+        $comment->like_cnt = 0;
+        $comment->save();
+
+        Board::find($id)->increment('comment_cnt');
+
+        return redirect()->route('api.boards.show', ['id' => $id]);
+
+    }
+
+    // public function uncomment(Request $request, $id){
+    //     Comment::destroy();
+    // }
+
 
 }
