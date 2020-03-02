@@ -29,6 +29,7 @@ class AddColumnsBoards extends Migration
 
         Schema::table('boards', function (Blueprint $table) {
             //
+            $table->dropColumn('view_cnt');
         });
 
     }

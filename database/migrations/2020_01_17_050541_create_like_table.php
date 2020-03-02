@@ -42,7 +42,7 @@ class CreateLikeTable extends Migration
 
         Schema::table('boards', function(Blueprint $table){
             //
-            $table->dropColumn('like_count');
+            $table->dropColumn('like_cnt');
         });
 
     }

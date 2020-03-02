@@ -9,7 +9,7 @@ class UserTableSeeder extends Seeder {
      * @return void
      */
     public function run(){
-        factory(User::class, 30)->create();
+        factory(User::class, 100)->create();
     }
 
 }
