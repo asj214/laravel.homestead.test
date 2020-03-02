@@ -1,7 +1,8 @@
 ###
 ### 게시판 목록
-GET http://laravel.homestead.test/api/v1/boards HTTP/1.1
+GET http://laravel.homestead.test/api/v1/boards
 Content-Type: application/json
+Authorization: Bearer L5szPL6W358ZT5ZpMk6zH8cdvIr5JqLLAutOhEVdbcXPWZNYg32J1jeT7O8C
 
 {
     "page": 1,
@@ -12,24 +13,27 @@ Content-Type: application/json
 
 ###
 ### 게시글 보기
-GET http://laravel.homestead.test/api/v1/boards/58 HTTP/1.1
+GET http://laravel.homestead.test/api/v1/boards/58
 Content-Type: application/json
+Authorization: Bearer L5szPL6W358ZT5ZpMk6zH8cdvIr5JqLLAutOhEVdbcXPWZNYg32J1jeT7O8C
 
 ###
 ### 게시글 작성
-POST http://laravel.homestead.test/api/v1/boards HTTP/1.1
+POST http://laravel.homestead.test/api/v1/boards
 Content-Type: application/json
+Authorization: Bearer L5szPL6W358ZT5ZpMk6zH8cdvIr5JqLLAutOhEVdbcXPWZNYg32J1jeT7O8C
 
 {
-    "user_id": 1,
+    "bbs_type": 1,
     "title": "My Father Goes To The Market With Donkey...",
     "body": "Horore Choo Choo Parero~"
 }
 
 ###
 ### 게시글 수정
-PUT http://laravel.homestead.test/api/v1/boards/100 HTTP/1.1
+PUT http://laravel.homestead.test/api/v1/boards/100
 Content-Type: application/json
+Authorization: Bearer L5szPL6W358ZT5ZpMk6zH8cdvIr5JqLLAutOhEVdbcXPWZNYg32J1jeT7O8C
 
 {
     "title": "안녕하세요. 하하하하하",
@@ -38,13 +42,15 @@ Content-Type: application/json
 
 ###
 ### 게시글 삭제
-DELETE http://laravel.homestead.test/api/v1/boards/57 HTTP/1.1
-
+DELETE http://laravel.homestead.test/api/v1/boards/57
+Content-Type: application/json
+Authorization: Bearer L5szPL6W358ZT5ZpMk6zH8cdvIr5JqLLAutOhEVdbcXPWZNYg32J1jeT7O8C
 
 ###
 ### banners
 GET http://laravel.homestead.test/api/v1/banners
 Content-Type: application/json
+Authorization: Bearer L5szPL6W358ZT5ZpMk6zH8cdvIr5JqLLAutOhEVdbcXPWZNYg32J1jeT7O8C
 
 {
     "page": 1,
@@ -59,9 +65,9 @@ Content-Type: application/json
 
 POST http://laravel.homestead.test/api/v1/boards/86/comment
 Content-Type: application/json
+Authorization: Bearer BSmBylOoWEvVEgEG3V3Gnv7aZdwqeLkyLteuN5c0LClgLOuqcnaT8mOLk8E4
 
 {
-    "user_id": 1,
     "body": "아버지는 나귀타고 장에 가시고...할머니는 건너마을 아저씨 댁에.."
 }
 
