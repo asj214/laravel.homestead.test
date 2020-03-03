@@ -73,7 +73,8 @@ class UserController extends Controller {
 
         $validatedData = $request->validate([
             'name' => 'required',
-            'nickname' => 'required'
+            'nickname' => 'required',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
         $user = User::find($id);
