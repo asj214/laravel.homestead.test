@@ -28,7 +28,7 @@ class Board extends Model {
     }
 
     public function comments(){
-        return $this->hasMany(Comment::class, 'commentable_id')->where('commentable_type', 'boards')->orderBy('id', 'desc');
+        return $this->hasMany(Comment::class, 'commentable_id')->where('depth', 1)->where('commentable_type', 'boards')->orderBy('group_id', 'asc');
     }
 
     public function likes(){

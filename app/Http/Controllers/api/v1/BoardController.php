@@ -29,7 +29,7 @@ class BoardController extends Controller {
     }
 
     public function show(Request $request, $id){
-        return new BoardResource(Board::with(['user', 'attachments', 'comments.user'])->find($id));
+        return new BoardResource(Board::with(['user', 'attachments', 'comments.answers'])->find($id));
     }
 
     public function store(Request $request){
@@ -85,19 +85,22 @@ class BoardController extends Controller {
             'body' => 'required'
         ]);
 
-        $depth = $request->input('depth', 1);
-
         $comment = new Comment();
         $comment->commentable_type = 'boards';
         $comment->commentable_id = $id;
+        $comment->depth = $request->input('depth') ?? 1;
         $comment->user_id = Auth::id();
         $comment->body = $request->body;
         $comment->like_cnt = 0;
         $comment->save();
 
+        $group_id = $request->input('group_id') ?? $comment->id;
+        $comment->group_id = $group_id;
+        $comment->save();
+
         Board::find($id)->increment('comment_cnt');
 
-        return redirect()->route('api.boards.show', ['id' => $id]);
+        return new BoardResource(Board::with(['user', 'attachments', 'comments.user'])->find($id));
 
     }
 

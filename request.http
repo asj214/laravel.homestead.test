@@ -14,7 +14,7 @@ Authorization: Bearer gssVe10Z1qyfYgs32apbVVaJXlv1VMZltpmGpMYHVSwMfN0hftW4KHouXt
 
 ###
 ### 게시글 보기
-GET http://laravel.homestead.test/api/v1/boards/112
+GET http://laravel.homestead.test/api/v1/boards/100
 Content-Type: application/json
 Authorization: Bearer gssVe10Z1qyfYgs32apbVVaJXlv1VMZltpmGpMYHVSwMfN0hftW4KHouXtmC
 
@@ -37,8 +37,8 @@ Content-Type: application/json
 Authorization: Bearer gssVe10Z1qyfYgs32apbVVaJXlv1VMZltpmGpMYHVSwMfN0hftW4KHouXtmC
 
 {
-    "title": "안녕하세요. 하하하하하",
-    "body": "라라벨 이제는 좀 쉽다."
+    "title": "My Father Goes To The Market With Donkey...",
+    "body": "Horore Choo Choo Parero~"
 }
 
 ###
@@ -64,12 +64,14 @@ Authorization: Bearer gssVe10Z1qyfYgs32apbVVaJXlv1VMZltpmGpMYHVSwMfN0hftW4KHouXt
 ##
 ### comment
 
-POST http://laravel.homestead.test/api/v1/boards/86/comment
+POST http://laravel.homestead.test/api/v1/boards/100/comment
 Content-Type: application/json
 Authorization: Bearer gssVe10Z1qyfYgs32apbVVaJXlv1VMZltpmGpMYHVSwMfN0hftW4KHouXtmC
 
 {
-    "body": "아버지는 나귀타고 장에 가시고...할머니는 건너마을 아저씨 댁에.."
+    "group_id": 55,
+    "depth": 2,
+    "body": "hello world"
 }
 
 
