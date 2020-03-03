@@ -2,7 +2,9 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
+use App\User;
 use App\Survey;
+use App\SurveyConfig;
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
 
@@ -14,8 +16,8 @@ $factory->define(Survey::class, function (Faker $faker) {
     $genders = ['N', 'M', 'F'];
 
     return [
-        'survey_id' => rand(1, 2),
-        'user_id' => rand(1, 60),
+        'survey_id' => SurveyConfig::select('id')->inRandomOrder()->first(),
+        'user_id' => User::select('id')->inRandomOrder()->first(),
         'name' => $faker->lastName.$faker->firstNameFemale,
         'email' => $faker->unique()->email,
         'birth' => $date->addWeeks(rand(1, 200))->format('Ymd'),
