@@ -47,7 +47,7 @@ class BoardController extends Controller {
         $board->body = $request->body;
         $board->save();
 
-        return new BoardResource(Board::with(['user', 'attachments', 'comments.user'])->find($board->id));
+        return new BoardResource(Board::with(['user', 'attachments', 'comments.answers'])->find($board->id));
 
     }
 
@@ -63,7 +63,7 @@ class BoardController extends Controller {
         $board->body = $request->body;
         $board->save();
 
-        return new BoardResource(Board::with(['user', 'attachments', 'comments.user'])->find($id));
+        return new BoardResource(Board::with(['user', 'attachments', 'comments.answers'])->find($id));
 
     }
 
@@ -100,7 +100,7 @@ class BoardController extends Controller {
 
         Board::find($id)->increment('comment_cnt');
 
-        return new BoardResource(Board::with(['user', 'attachments', 'comments.user'])->find($id));
+        return new BoardResource(Board::with(['user', 'attachments', 'comments.answers'])->find($id));
 
     }
 
