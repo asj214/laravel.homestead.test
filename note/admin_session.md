@@ -129,7 +129,7 @@ protected $routeMiddleware = [
 ];
 ```
 
-5. `app/Providers/RouteServiceProvider.php` 에 `mapAdminRoutes()` 추가
+6. `app/Providers/RouteServiceProvider.php` 에 `mapAdminRoutes()` 추가
 ```php
 ...
 public function map(){
@@ -152,7 +152,7 @@ protected function mapAdminRoutes() {
 }
 ```
 
-6. `routes/admin.php` 파일 생성
+7. `routes/admin.php` 파일 생성
 ```php
 // admin middleware를 사용하고, namespace에 admin.을 추가한다.
 Route::group(['as' => 'admin.'], function(){
@@ -169,7 +169,7 @@ Route::group(['as' => 'admin.'], function(){
 });
 ```
 
-7. `app/Http/Controller/Auth/LoginController` 추가 작성
+8. `app/Http/Controller/Auth/LoginController` 추가 작성
 ```php
 ...
 public function admin_login_form(){
