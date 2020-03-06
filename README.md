@@ -72,3 +72,4 @@
 4. [Resources](https://github.com/asj214/laravel.homestead.test/blob/master/note/resources.md)
 5. [API사용자인증](https://github.com/asj214/laravel.homestead.test/blob/master/note/api_token.md)
 6. [email 외 다른 컬럼으로 로그인](https://github.com/asj214/laravel.homestead.test/blob/master/note/authenticated.md)
+7. [users, admins 세션 분리](https://github.com/asj214/laravel.homestead.test/blob/master/note/admin_session.md)
