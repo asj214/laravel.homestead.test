@@ -36,3 +36,4 @@ Homestead.yaml
 
 # exceptions
 !/storage/app/public/assets/*
+.DS_Store
