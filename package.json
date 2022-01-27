@@ -21,7 +21,7 @@
         "resolve-url-loader": "^2.3.1",
         "sass": "^1.15.2",
         "sass-loader": "^7.1.0",
-        "three": "^0.113.2",
+        "three": "^0.137.0",
         "vanta": "^0.5.10",
         "vue-template-compiler": "^2.6.11"
     },
